@@ -1,0 +1,28 @@
+{% import 'macros' as macro %}
+<!DOCTYPE html>
+<html lang="{{ isoLocale }}" itemscope itemtype="http://schema.org/WebPage">
+<head>
+    {% include 'layouts/_common_head' %}
+    {% block head-content %}{% endblock %}
+</head>
+<body class="{{ bodyClasses.join(' ') }} cn-controller-{{ controller }} cn-action-{{ action }}">
+
+<div data-cn-body-wrapper class="cn-body-wrapper">
+    {{ macro.flash_message('liked_product_notification') }}
+    {% widget 'first-time-seen' %}
+    {% widget 'menu' %}
+
+    {% block before-content-wrapper %}{% endblock %}
+    {% block main-content-header %} {% endblock %}
+    <div class="cn-main">
+        {% block first-in-content-wrapper %}{% endblock %}
+        {% block content %}{% endblock %}
+        {% block last-in-content-wrapper %}{% endblock %}
+    </div>
+    {% block after-content-wrapper %}{% endblock %}
+
+    {% widget 'footer' %}
+</div>
+<div data-cn-gototop class="cn-gototop hidden"></div>
+</body>
+</html>

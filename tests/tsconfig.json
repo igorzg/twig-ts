@@ -4,7 +4,7 @@
     "target": "ES6",
     "module": "commonjs",
     "moduleResolution": "node",
-    "outDir": "dist",
+    "outDir": "./dist",
     "sourceMap": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
@@ -12,10 +12,8 @@
     "noImplicitAny": false
   },
   "files": [
-    "src/core.ts",
-    "src/lexer.ts",
-    "src/tokens.ts",
-    "typings/main.d.ts"
+    "lexer-spec.ts",
+    "../typings/main.d.ts"
   ],
   "compileOnSave": true
 }
