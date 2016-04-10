@@ -6,7 +6,7 @@
 export function uuid() {
 	let d = new Date().getTime();
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-		var r = (d + Math.random() * 16) % 16 | 0;
+		let r = (d + Math.random() * 16) % 16 | 0;
 		d = Math.floor(d / 16);
 		return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
 	});
@@ -17,31 +17,32 @@ export function uuid() {
  * @param genFunc Generator
  * @returns {Function}
  */
-export function async(genFunc: Function) {
-	var generator = genFunc();
+export function async(genFunc):Promise<any> {
+	let generator = genFunc();
 
 	try {
-		return handle(generator.next());
+		return _handleAsync(generator.next());
 	} catch (e) {
 		return Promise.reject(e);
 	}
 	/**
-	 * Generator handler
-	 * @private
+	 * Handler async
 	 * @param item
 	 * @returns {any}
+	 * @private
 	 */
-	function handle(item) {
+	function _handleAsync(item) {
 		if (item.done) {
 			return Promise.resolve(item.value);
 		}
 		return Promise
 			.resolve(item.value)
 			.then(
-				val => handle(generator.next(val)),
-				e => handle(generator.throw(e))
+				val => _handleAsync(generator.next(val)),
+				e => _handleAsync(generator.throw(e))
 			);
 	}
+
 }
 /**
  * @since 0.0.1
@@ -212,7 +213,7 @@ export function isEqual(a, b) {
 			throw e;
 		}
 	} else if (isObject(a) && isObject(b)) {
-		var equal = [];
+		let equal = [];
 		// check references first
 
 		if (a === b) {

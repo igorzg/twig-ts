@@ -1,15 +1,14 @@
-import {Lexer} from '../src/lexer';
-import {LexerOptions} from '../src/lexeroptions';
+import {Lexer} from '../lexer';
+import {LexerOptions} from '../lexeroptions';
 import {readFileSync} from 'fs';
 
-let layout = readFileSync(__dirname + '/../../layout.twig', 'utf-8');
+let layout = readFileSync(__dirname + '/../../tmpl/layout.twig', 'utf-8');
 
 describe('Lexer', () => {
 	it('Should compile layout.twig', (done) => {
 		let lexer = new Lexer(layout, new LexerOptions());
 		lexer.parse().then((tokens) => {
 			console.log('tokens', tokens);
-			debugger;
 			done();
 		});
 	});

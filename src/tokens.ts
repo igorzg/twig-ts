@@ -1,3 +1,4 @@
+export {Token} from './token';
 export enum Tokens {
 	STRING,
 	WHITESPACE,
@@ -25,8 +26,4 @@ export enum Tokens {
 	SPECIAL,
 	REGEX,
 	UNKNOWN
-}
-
-export class Token {
-
 }

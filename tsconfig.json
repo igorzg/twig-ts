@@ -15,7 +15,8 @@
     "src/core.ts",
     "src/lexer.ts",
     "src/tokens.ts",
-    "typings/main.d.ts"
+    "typings/main.d.ts",
+    "src/tests/lexer-spec.ts"
   ],
   "compileOnSave": true
 }
