@@ -1,0 +1,17 @@
+{
+  "version": "1.8.9",
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "es6",
+    "rootDir": "./src/",
+    "sourceMap": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "removeComments": true,
+    "noImplicitAny": true
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false
+}

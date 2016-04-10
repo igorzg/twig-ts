@@ -1,0 +1,20 @@
+{
+  "name": "twig-ts",
+  "version": "1.0.0",
+  "description": "Templating engine for nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "templating",
+    "engine",
+    "twig",
+    "node"
+  ],
+  "author": "Igor Ivanovic",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^1.8.9"
+  }
+}
