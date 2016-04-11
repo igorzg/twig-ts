@@ -21,6 +21,7 @@
     "mocha": "node_modules/mocha"
   },
   "dependencies": {
+    "chai": "^3.5.0",
     "mocha": "^2.4.5",
     "tslint": "^3.7.1",
     "typescript": "^1.8.9"

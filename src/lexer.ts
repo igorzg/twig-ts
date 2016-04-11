@@ -1,6 +1,7 @@
 import {Tokens, Token} from './tokens';
-import {async} from './core';
+import {async, isNull} from './core';
 import {ILexerOptions, LexerOptions} from './lexeroptions';
+import {InvalidTokenError} from './error';
 
 const CHARS_WHITESPACE = ' \n\t\r\u00A0';
 const CHARS_DELIMITER = '()[]{}%*-+~/#,:|.<>=!';
@@ -10,14 +11,14 @@ const CHAR_NEW_LINE = '\n';
  * Lexer class
  */
 export class Lexer {
-	str:string;
-	opts:ILexerOptions;
-	index:number = 0;
-	lineNumber:number = 0;
-	columnNumber:number = 0;
-	length:number;
-	tokens:Array<Token> = [];
-	scan:boolean = false;
+	private str:string;
+	private opts:ILexerOptions;
+	private index:number = 0;
+	private lineNumber:number = 1;
+	private columnNumber:number = 1;
+	private length:number;
+	private tokens:Array<Token> = [];
+	private inToken:Tokens = null;
 
 	/**
 	 * Constructor
@@ -43,7 +44,7 @@ export class Lexer {
 		return async(function* parseToken():any {
 			while (_that.index < _that.length) {
 				yield _that.nextToken();
-				_that.index += 1;
+				_that.forward();
 			}
 			return yield _that.tokens;
 		});
@@ -54,7 +55,7 @@ export class Lexer {
 	 * @param token
 	 * @private
 	 */
-	_isPresent(token:string):boolean {
+	private isPresent(token:string):boolean {
 		if (this.index + token.length <= this.length) {
 			return this.str.slice(this.index, this.index + token.length) === token;
 		}
@@ -66,9 +67,9 @@ export class Lexer {
 	 * @param token
 	 * @private
 	 */
-	_extract(token:string):string {
-		if (this._isPresent(token)) {
-			this.index += token.length;
+	private extract(token:string):string {
+		if (this.isPresent(token)) {
+			this.forwardN(token.length);
 			return token;
 		}
 		return null;
@@ -78,14 +79,34 @@ export class Lexer {
 	 * Check if we are at eol
 	 * @returns {boolean}
 	 */
-	isDone():boolean {
+	private isDone():boolean {
 		return this.index >= this.length;
+	}
+
+	/**
+	 * Forward
+	 * @param n
+	 */
+	private forwardN(n:number) {
+		while (--n > 0) {
+			this.forward();
+		}
+	}
+
+	/**
+	 * Go backword for amount of number
+	 * @param n
+	 */
+	private backwordN(n:number) {
+		while (--n > 0) {
+			this.backward();
+		}
 	}
 
 	/**
 	 * Go forward
 	 */
-	forward() {
+	private forward() {
 		this.index++;
 		if (this.previous() === CHAR_NEW_LINE) {
 			this.lineNumber++;
@@ -98,7 +119,7 @@ export class Lexer {
 	/**
 	 * Go backward
 	 */
-	backward() {
+	private backward() {
 		this.index--;
 		if (this.current() === CHAR_NEW_LINE) {
 			let index = this.str.lastIndexOf(CHAR_NEW_LINE, this.index - 1);
@@ -113,7 +134,7 @@ export class Lexer {
 	 * Get current index string
 	 * @returns {string}
 	 */
-	current():string {
+	private current():string {
 		return this.str.charAt(this.index);
 	}
 
@@ -121,39 +142,71 @@ export class Lexer {
 	 * Get previous index string
 	 * @returns {string}
 	 */
-	previous():string {
+	private previous():string {
 		return this.str.charAt(this.index - 1);
 	}
 
-
-	scanToken() {
-
+	/**
+	 * Create instance of token
+	 * @param type
+	 * @param token
+	 * @returns {any}
+	 */
+	private token(type:Tokens, token:string):Token {
+		let tok = new Token(
+			type,
+			token,
+			this.lineNumber,
+			this.columnNumber
+		);
+		this.tokens.push(tok);
+		return tok;
 	}
+
 	/**
 	 * Process tokens
 	 */
-	nextToken() {
-		let tok, startChars = (
-			this.opts.BLOCK_START.charAt(0) +
-			this.opts.VARIABLE_START.charAt(0) +
-			this.opts.COMMENT_START.charAt(0) +
-			this.opts.COMMENT_END.charAt(0)
-		);
-		if (
-			(tok = this._extract(this.opts.BLOCK_START + '-')) ||
-			(tok = this._extract(this.opts.BLOCK_START))
+	private nextToken() {
+		let tok;
+
+		if (!isNull(this.inToken)) {
+
+			if (this.inToken !== Tokens.COMMENT_START) {
+				if (this.isPresent(this.opts.BLOCK_START + '-') || this.isPresent(this.opts.BLOCK_START)) {
+					throw new InvalidTokenError(
+						this.token(
+							Tokens.BLOCK_START,
+							this.extract(this.opts.BLOCK_START)
+						)
+					);
+				} else if (this.isPresent(this.opts.VARIABLE_START)) {
+					throw new InvalidTokenError(
+						this.token(
+							Tokens.VARIABLE_START,
+							this.extract(this.opts.VARIABLE_START)
+						)
+					);
+				}
+			} else {
+
+			}
+		} else if (
+			(tok = this.extract(this.opts.BLOCK_START + '-')) ||
+			(tok = this.extract(this.opts.BLOCK_START))
 		) {
-			this.scanToken();
-			this.tokens.push(
-				new Token(
-					Tokens.BLOCK_START,
-					tok,
-					this.lineNumber,
-					this.columnNumber
-				)
-			);
+			this.inToken = Tokens.BLOCK_START;
+			this.token(Tokens.BLOCK_START, tok);
+		} else if (
+			(tok = this.extract(this.opts.VARIABLE_START))
+		) {
+			this.inToken = Tokens.VARIABLE_START;
+			this.token(Tokens.VARIABLE_START, tok);
+		} else if (
+			(tok = this.extract(this.opts.COMMENT_START))
+		) {
+			this.inToken = Tokens.COMMENT_START;
+			this.token(Tokens.COMMENT_START, tok);
 		}
-		// console.log('token', this.index);
 	}
 
 }
