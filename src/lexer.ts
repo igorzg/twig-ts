@@ -1,7 +1,7 @@
 import {Tokens, Token} from './tokens';
 import {async, isNull} from './core';
 import {ILexerOptions, LexerOptions} from './lexeroptions';
-import {InvalidTokenError} from './error';
+import {InvalidTokenError, InvalidCloseTokenError, TokenNotFoundError} from './error';
 
 const CHARS_WHITESPACE = ' \n\t\r\u00A0';
 const CHARS_DELIMITER = '()[]{}%*-+~/#,:|.<>=!';
@@ -18,7 +18,7 @@ export class Lexer {
 	private columnNumber:number = 1;
 	private length:number;
 	private tokens:Array<Token> = [];
-	private inToken:Tokens = null;
+	private tokenType:Tokens = null;
 
 	/**
 	 * Constructor
@@ -51,11 +51,11 @@ export class Lexer {
 	}
 
 	/**
-	 * Find an token
+	 * Peek next token
 	 * @param token
 	 * @private
 	 */
-	private isPresent(token:string):boolean {
+	private peekNext(token:string):boolean {
 		if (this.index + token.length <= this.length) {
 			return this.str.slice(this.index, this.index + token.length) === token;
 		}
@@ -63,12 +63,12 @@ export class Lexer {
 	}
 
 	/**
-	 * Extract
+	 * Collect
 	 * @param token
 	 * @private
 	 */
-	private extract(token:string):string {
-		if (this.isPresent(token)) {
+	private collect(token:string):string {
+		if (this.peekNext(token)) {
 			this.forwardN(token.length);
 			return token;
 		}
@@ -80,7 +80,7 @@ export class Lexer {
 	 * @returns {boolean}
 	 */
 	private isDone():boolean {
-		return this.index >= this.length;
+		return this.index > this.length - 2;
 	}
 
 	/**
@@ -164,48 +164,201 @@ export class Lexer {
 	}
 
 	/**
+	 * Open token
+	 */
+	private openToken() {
+		let tok;
+		if (
+			(tok = this.collect(this.opts.BLOCK_START + '-')) ||
+			(tok = this.collect(this.opts.BLOCK_START))
+		) {
+			this.tokenType = Tokens.BLOCK_START;
+			this.token(Tokens.BLOCK_START, tok);
+		} else if (
+			(tok = this.collect(this.opts.VARIABLE_START))
+		) {
+			this.tokenType = Tokens.VARIABLE_START;
+			this.token(Tokens.VARIABLE_START, tok);
+		} else if (
+			(tok = this.collect(this.opts.COMMENT_START))
+		) {
+			this.tokenType = Tokens.COMMENT_START;
+			this.token(Tokens.COMMENT_START, tok);
+		}
+	}
+
+	/**
+	 * Process token
+	 */
+	private processToken() {
+		// closing token
+		if (this.isClosingToken()) {
+			return this.closeToken();
+		} else if (this.isOpeningToken()) {
+			throw new InvalidTokenError(
+				this.token(
+					this.tokenType,
+					this.collectOpenToken()
+				)
+			);
+		}
+
+
+	}
+
+	/**
+	 * Collect open token
+	 * @returns {any}
+	 */
+	private collectOpenToken():string {
+		if (this.peekNext(this.opts.BLOCK_START + '-')) {
+			return this.collect(this.opts.BLOCK_START + '-');
+		} else if (this.peekNext(this.opts.BLOCK_START)) {
+			return this.collect(this.opts.BLOCK_START);
+		} else if (this.peekNext(this.opts.VARIABLE_START)) {
+			return this.collect(this.opts.VARIABLE_START);
+		} else if (this.peekNext(this.opts.COMMENT_START)) {
+			return this.collect(this.opts.COMMENT_START);
+		}
+		return null;
+	}
+
+	/**
+	 * Collect open token
+	 * @returns {any}
+	 */
+	private collectCloseToken():string {
+		if (this.peekNext('-' + this.opts.BLOCK_END)) {
+			return this.collect('-' + this.opts.BLOCK_END);
+		} else if (this.peekNext(this.opts.BLOCK_END)) {
+			return this.collect(this.opts.BLOCK_END);
+		} else if (this.peekNext(this.opts.VARIABLE_END)) {
+			return this.collect(this.opts.VARIABLE_END);
+		} else if (this.peekNext(this.opts.COMMENT_END)) {
+			return this.collect(this.opts.COMMENT_END);
+		}
+		return null;
+	}
+
+	/**
+	 * Check if next token is opening
+	 * @returns {boolean}
+	 */
+	private isOpeningToken():boolean {
+		return (
+			this.peekNext(this.opts.BLOCK_START + '-') ||
+			this.peekNext(this.opts.BLOCK_START) ||
+			this.peekNext(this.opts.VARIABLE_START) ||
+			this.peekNext(this.opts.COMMENT_START)
+		);
+	}
+
+	/**
+	 * Peek next
+	 * @returns {boolean}
+	 */
+	private isClosingToken():boolean {
+		return (
+			this.peekNext('-' + this.opts.BLOCK_END) ||
+			this.peekNext(this.opts.BLOCK_END) ||
+			this.peekNext(this.opts.VARIABLE_END) ||
+			this.peekNext(this.opts.COMMENT_END)
+		);
+	}
+
+	/**
+	 * Check if is token open
+	 * @returns {boolean}
+	 */
+	private isTokenOpen() {
+		return !isNull(this.tokenType);
+	}
+	/**
+	 * Checck if is token type
+	 * @param type
+	 * @returns {boolean}
+	 */
+	private isTokenType(type):boolean {
+		return this.tokenType === type;
+	}
+
+	/**
+	 * Check if token is comment type
+	 * @returns {boolean}
+	 */
+	private isCommentType() {
+		return this.isTokenType(Tokens.COMMENT_START);
+	}
+
+	/**
+	 * Check if token is block type
+	 * @returns {boolean}
+	 */
+	private isBlockType() {
+		return this.isTokenType(Tokens.BLOCK_START);
+	}
+
+	/**
+	 * Check if token is variable type
+	 * @returns {boolean}
+	 */
+	private isVariableType() {
+		return this.isTokenType(Tokens.VARIABLE_START);
+	}
+	/**
+	 * Close token
+	 */
+	private closeToken() {
+		if (this.peekNext(this.opts.COMMENT_END) && this.isCommentType()) { // close comment
+			this.token(
+				Tokens.COMMENT_END,
+				this.collectCloseToken()
+			);
+			this.tokenType = null;
+		} else if (this.peekNext(this.opts.BLOCK_END) && this.isBlockType()) { // close block
+			this.token(
+				Tokens.BLOCK_END,
+				this.collectCloseToken()
+			);
+			this.tokenType = null;
+		} else if (this.peekNext('-' + this.opts.BLOCK_END) && this.isBlockType()) {
+			this.token(
+				Tokens.BLOCK_END,
+				this.collectCloseToken()
+			);
+			this.tokenType = null;
+		} else if (this.peekNext(this.opts.VARIABLE_END) && this.isVariableType()) {
+			this.token(
+				Tokens.VARIABLE_END,
+				this.collectCloseToken()
+			);
+			this.tokenType = null;
+		} else {
+			throw new InvalidCloseTokenError(
+				this.token(
+					this.tokenType,
+					this.collectCloseToken()
+				)
+			);
+		}
+	}
+
+	/**
 	 * Process tokens
 	 */
 	private nextToken() {
-		let tok;
-
-		if (!isNull(this.inToken)) {
-
-			if (this.inToken !== Tokens.COMMENT_START) {
-				if (this.isPresent(this.opts.BLOCK_START + '-') || this.isPresent(this.opts.BLOCK_START)) {
-					throw new InvalidTokenError(
-						this.token(
-							Tokens.BLOCK_START,
-							this.extract(this.opts.BLOCK_START)
-						)
-					);
-				} else if (this.isPresent(this.opts.VARIABLE_START)) {
-					throw new InvalidTokenError(
-						this.token(
-							Tokens.VARIABLE_START,
-							this.extract(this.opts.VARIABLE_START)
-						)
-					);
-				}
-			} else {
-
-			}
-		} else if (
-			(tok = this.extract(this.opts.BLOCK_START + '-')) ||
-			(tok = this.extract(this.opts.BLOCK_START))
-		) {
-			this.inToken = Tokens.BLOCK_START;
-			this.token(Tokens.BLOCK_START, tok);
-		} else if (
-			(tok = this.extract(this.opts.VARIABLE_START))
-		) {
-			this.inToken = Tokens.VARIABLE_START;
-			this.token(Tokens.VARIABLE_START, tok);
-		} else if (
-			(tok = this.extract(this.opts.COMMENT_START))
-		) {
-			this.inToken = Tokens.COMMENT_START;
-			this.token(Tokens.COMMENT_START, tok);
+		if (this.isTokenOpen() && this.isDone()) {
+			throw new TokenNotFoundError(
+				this.tokens.slice().pop(),
+				this.token(
+					this.tokenType,
+					this.previous()
+				)
+			);
+		} else if (this.isTokenOpen()) {
+			this.processToken();
+		} else {
+			this.openToken();
 		}
 	}
 
