@@ -46,7 +46,10 @@ export class Lexer {
 				yield _that.nextToken();
 				_that.forward();
 			}
-			return yield _that.tokens;
+			return yield {
+				str: _that.str,
+				tokens: _that.tokens
+			};
 		});
 	}
 
@@ -194,7 +197,7 @@ export class Lexer {
 		// closing token
 		if (this.isClosingToken()) {
 			return this.closeToken();
-		} else if (this.isOpeningToken()) {
+		} else if (this.isOpeningToken() && !this.isCommentType()) {
 			throw new InvalidTokenError(
 				this.token(
 					this.tokenType,
@@ -273,6 +276,7 @@ export class Lexer {
 	private isTokenOpen() {
 		return !isNull(this.tokenType);
 	}
+
 	/**
 	 * Checck if is token type
 	 * @param type
@@ -305,6 +309,7 @@ export class Lexer {
 	private isVariableType() {
 		return this.isTokenType(Tokens.VARIABLE_START);
 	}
+
 	/**
 	 * Close token
 	 */
@@ -333,7 +338,7 @@ export class Lexer {
 				this.collectCloseToken()
 			);
 			this.tokenType = null;
-		} else {
+		} else if (!this.isCommentType()) {
 			throw new InvalidCloseTokenError(
 				this.token(
 					this.tokenType,
