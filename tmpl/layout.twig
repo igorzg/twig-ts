@@ -1,4 +1,4 @@
-{% import 'macros' as macro %}
+{% import    'macros' as macro %}
 <!DOCTYPE html>
 <html lang="{{ isoLocale }}" itemscope itemtype="http://schema.org/WebPage">
 <head>
@@ -10,7 +10,7 @@
 <div data-cn-body-wrapper class="cn-body-wrapper">
     {{ macro.flash_message('liked_product_notification') }}
     {% widget 'first-time-seen' %}
-    {% widget 'menu' %}
+    {% widget "menu" %}
 
     {% block before-content-wrapper %}{% endblock %}
     {% block main-content-header %} {% endblock %}
@@ -21,7 +21,7 @@
     </div>
     {% block after-content-wrapper %}{% endblock %}
 
-   {% widget 'footer' %}
+    {% widget 'footer' %}
 </div>
 <div data-cn-gototop class="cn-gototop hidden"></div>
 </body>

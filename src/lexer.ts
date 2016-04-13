@@ -59,6 +59,14 @@ export class Lexer {
 	}
 
 	/**
+	 * Peek next in token
+	 * @param token
+	 * @returns {boolean}
+	 */
+	private peekNextIn(token: string) {
+		return token.indexOf(this.current()) > -1;
+	}
+	/**
 	 * Peek next token
 	 * @param token
 	 * @private
@@ -196,6 +204,33 @@ export class Lexer {
 	}
 
 	/**
+	 * Parse string
+	 * @param delimiter
+	 */
+	private parseString(delimiter) {
+		let str = '', isClosed = false;
+		this.forward(); // skip first delimiter
+		while (!this.isDone()) {
+			if (this.peekNext(delimiter)) {
+				isClosed = true;
+				this.forward(); // skip last delimiter
+				break;
+			}
+			str += this.current();
+			this.forward();
+		}
+		if (this.isDone() && !isClosed) {
+			throw new InvalidCloseTokenError(
+				this.token(
+					Tokens.STRING,
+					str
+				)
+			);
+		}
+		return str;
+	}
+
+	/**
 	 * Process token
 	 */
 	private processToken() {
@@ -209,8 +244,22 @@ export class Lexer {
 					this.collectOpenToken()
 				)
 			);
+		} else if (this.peekNext('"')) {
+			this.token(
+				Tokens.STRING,
+				this.parseString('"')
+			);
+		} else if (this.peekNext('\'')) {
+			this.token(
+				Tokens.STRING,
+				this.parseString('\'')
+			);
+		} else if (this.peekNextIn(CHARS_WHITESPACE)) {
+			this.token(
+				Tokens.WHITESPACE,
+				this.current()
+			);
 		}
-
 
 	}
 

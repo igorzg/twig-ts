@@ -10,11 +10,59 @@ import {inspect} from 'util';
 let layout = readFileSync(__dirname + '/../../tmpl/layout.twig', 'utf-8');
 
 describe('Lexer', () => {
-	it('Should compile layout.twig', (done) => {
+	it('Should give correct lexical analysis of layout.twig', (done) => {
 		let lexer = new Lexer(layout, new LexerOptions());
 		lexer.parse().then(
 			(data) => {
-				assert.equal(data.tokens.length, 48);
+
+				console.log('data.tokens', data.tokens);
+				assert.equal(data.tokens.length, 55);
+				assert.isTrue(isEqual(data.tokens, [
+					new Token(
+						Tokens.VARIABLE_START,
+						'{{', 2, 8
+					),
+					new Token(
+						Tokens.STRING,
+						'liked_product_notification', 2, 58
+					),
+					new Token(
+						Tokens.VARIABLE_END,
+						'}}', 2, 61
+					),
+					new Token(
+						Tokens.BLOCK_START,
+						'{%', 3, 8
+					),
+					new Token(
+						Tokens.STRING,
+						'first-time-seen', 3, 34
+					),
+					new Token(
+						Tokens.BLOCK_END,
+						'%}', 3, 36
+					),
+					new Token(
+						Tokens.BLOCK_START,
+						'{%-', 4, 9
+					),
+					new Token(
+						Tokens.STRING,
+						'abc', 4, 23
+					),
+					new Token(
+						Tokens.BLOCK_END,
+						'-%}', 4, 26
+					),
+					new Token(
+						Tokens.COMMENT_START,
+						'{#', 5, 8
+					),
+					new Token(
+						Tokens.COMMENT_END,
+						'#}', 7, 8
+					)
+				]));
 				done();
 			}
 		).catch(done);
@@ -40,6 +88,10 @@ describe('Lexer', () => {
 						'{{', 2, 8
 					),
 					new Token(
+						Tokens.STRING,
+						'liked_product_notification', 2, 58
+					),
+					new Token(
 						Tokens.VARIABLE_END,
 						'}}', 2, 61
 					),
@@ -48,12 +100,20 @@ describe('Lexer', () => {
 						'{%', 3, 8
 					),
 					new Token(
+						Tokens.STRING,
+						'first-time-seen', 3, 34
+					),
+					new Token(
 						Tokens.BLOCK_END,
 						'%}', 3, 36
 					),
 					new Token(
 						Tokens.BLOCK_START,
 						'{%-', 4, 9
+					),
+					new Token(
+						Tokens.STRING,
+						'abc', 4, 23
 					),
 					new Token(
 						Tokens.BLOCK_END,
