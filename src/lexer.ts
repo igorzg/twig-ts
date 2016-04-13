@@ -8,7 +8,7 @@ import {
 	InvalidOpenTokenError
 } from './error';
 
-const CHARS_WHITESPACE = ' \n\t\r\u00A0';
+const CHARS_WHITESPACE = new RegExp('\\s|\\n|\\t|\\r|\\u00A0');
 const CHARS_DELIMITER = '()[]{}%*-+~/#,:|.<>=!';
 const CHARS_INT = '0123456789';
 const CHAR_NEW_LINE = '\n';
@@ -63,9 +63,10 @@ export class Lexer {
 	 * @param token
 	 * @returns {boolean}
 	 */
-	private peekNextIn(token: string) {
-		return token.indexOf(this.current()) > -1;
+	private peekNextRegex(token:RegExp):boolean {
+		return token.test(this.next());
 	}
+
 	/**
 	 * Peek next token
 	 * @param token
@@ -158,6 +159,14 @@ export class Lexer {
 	 * Get previous index string
 	 * @returns {string}
 	 */
+	private next():string {
+		return this.str.charAt(this.index + 1);
+	}
+
+	/**
+	 * Get previous index string
+	 * @returns {string}
+	 */
 	private previous():string {
 		return this.str.charAt(this.index - 1);
 	}
@@ -213,7 +222,6 @@ export class Lexer {
 		while (!this.isDone()) {
 			if (this.peekNext(delimiter)) {
 				isClosed = true;
-				this.forward(); // skip last delimiter
 				break;
 			}
 			str += this.current();
@@ -244,6 +252,11 @@ export class Lexer {
 					this.collectOpenToken()
 				)
 			);
+		} else if (CHARS_WHITESPACE.test(this.current())) {
+			this.token(
+				Tokens.WHITESPACE,
+				this.current()
+			);
 		} else if (this.peekNext('"')) {
 			this.token(
 				Tokens.STRING,
@@ -253,11 +266,6 @@ export class Lexer {
 			this.token(
 				Tokens.STRING,
 				this.parseString('\'')
-			);
-		} else if (this.peekNextIn(CHARS_WHITESPACE)) {
-			this.token(
-				Tokens.WHITESPACE,
-				this.current()
 			);
 		}
 

@@ -151,7 +151,7 @@ describe('Lexer', () => {
 		{# and it should throw error`, new LexerOptions());
 		lexer.parse().then(null, (error) => {
 			assert.equal(error, `Error: Unexpected end of input, 
-			Token was opened with token: {# at line 2 column 3,
+			Token was opened with token:   at line 2 column 24,
 			expected END token should be found at line: 2, column: 29`);
 			done();
 		}).catch(done);
