@@ -202,6 +202,8 @@ export function isEqual(a, b) {
 		// check references first
 		if (a === b) {
 			return true;
+		} else if (a.constructor.name !== b.constructor.name) {
+			return false;
 		}
 
 		try {
@@ -218,6 +220,8 @@ export function isEqual(a, b) {
 
 		if (a === b) {
 			return true;
+		} else if (a.constructor.name !== b.constructor.name) {
+			return false;
 		}
 
 		try {

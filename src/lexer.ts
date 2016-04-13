@@ -1,7 +1,12 @@
 import {Tokens, Token} from './tokens';
 import {async, isNull} from './core';
 import {ILexerOptions, LexerOptions} from './lexeroptions';
-import {InvalidTokenError, InvalidCloseTokenError, TokenNotFoundError} from './error';
+import {
+	InvalidTokenError,
+	InvalidCloseTokenError,
+	TokenNotFoundError,
+	InvalidOpenTokenError
+} from './error';
 
 const CHARS_WHITESPACE = ' \n\t\r\u00A0';
 const CHARS_DELIMITER = '()[]{}%*-+~/#,:|.<>=!';
@@ -36,10 +41,10 @@ export class Lexer {
 	}
 
 	/**
-	 * Parse
-	 * @returns {Promise<Token>}
+	 * Get parsed tokens
+	 * @returns {Promise<any>}
 	 */
-	parse():Promise<Array<Token>> {
+	parse():Promise<{str:string, tokens:Array<Token>}> {
 		let _that = this;
 		return async(function* parseToken():any {
 			while (_that.index < _that.length) {
@@ -244,6 +249,21 @@ export class Lexer {
 	}
 
 	/**
+	 * Collect open token
+	 * @returns {any}
+	 */
+	private getCloseTokenType():Tokens {
+		if (this.peekNext('-' + this.opts.BLOCK_END) || this.peekNext(this.opts.BLOCK_END)) {
+			return Tokens.BLOCK_END;
+		} else if (this.peekNext(this.opts.VARIABLE_END)) {
+			return Tokens.VARIABLE_END;
+		} else if (this.peekNext(this.opts.COMMENT_END)) {
+			return Tokens.COMMENT_END;
+		}
+		return null;
+	}
+
+	/**
 	 * Check if next token is opening
 	 * @returns {boolean}
 	 */
@@ -311,7 +331,7 @@ export class Lexer {
 	}
 
 	/**
-	 * Close token
+	 * Close token and run analysis to detect possible errors!
 	 */
 	private closeToken() {
 		if (this.peekNext(this.opts.COMMENT_END) && this.isCommentType()) { // close comment
@@ -349,7 +369,7 @@ export class Lexer {
 	}
 
 	/**
-	 * Process tokens
+	 * Get next token, run analysis to detect possible errors!
 	 */
 	private nextToken() {
 		if (this.isTokenOpen() && this.isDone()) {
@@ -358,6 +378,13 @@ export class Lexer {
 				this.token(
 					this.tokenType,
 					this.previous()
+				)
+			);
+		} else if (this.isClosingToken() && !this.isTokenOpen()) {
+			throw new InvalidOpenTokenError(
+				this.token(
+					this.getCloseTokenType(),
+					this.collectCloseToken()
 				)
 			);
 		} else if (this.isTokenOpen()) {
