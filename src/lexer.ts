@@ -8,9 +8,11 @@ import {
 	InvalidOpenTokenError
 } from './error';
 
-const CHARS_WHITESPACE = new RegExp('\\s|\\n|\\t|\\r|\\u00A0');
-const CHARS_DELIMITER = '()[]{}%*-+~/#,:|.<>=!';
-const CHARS_INT = '0123456789';
+const CHARS_WHITESPACE = /\s|\n|\t|\r|\u00A0/;
+const CHARS_DELIMITER = /\(|\)|\.|\[|]|\{|}|%|\*|\-|\+|~|\/|#|,|:|\||<|>|=|!/;
+const CHARS_ALL = /\s|\n|\t|\r|\u00A0|\(|\)|\.|\[|]|\{|}|%|\*|\-|\+|~|\/|#|,|:|\||<|>|=|!/;
+const CHARS_NUMBER = /^[0-9]+$/;
+const CHARS_BOOLEAN = /^(true|false)$/;
 const CHAR_NEW_LINE = '\n';
 /**
  * Lexer class
@@ -59,15 +61,6 @@ export class Lexer {
 	}
 
 	/**
-	 * Peek next in token
-	 * @param token
-	 * @returns {boolean}
-	 */
-	private peekNextRegex(token:RegExp):boolean {
-		return token.test(this.next());
-	}
-
-	/**
 	 * Peek next token
 	 * @param token
 	 * @private
@@ -93,6 +86,24 @@ export class Lexer {
 	}
 
 	/**
+	 * Collect until
+	 * @param match
+	 * @private
+	 */
+	private collectUntil(match:RegExp):string {
+		let str = '';
+		while (!this.isDone()) {
+			if (match.test(this.current())) {
+				this.backward();
+				break;
+			}
+			str += this.current();
+			this.forward();
+		}
+		return str;
+	}
+
+	/**
 	 * Check if we are at eol
 	 * @returns {boolean}
 	 */
@@ -107,16 +118,6 @@ export class Lexer {
 	private forwardN(n:number) {
 		while (--n > 0) {
 			this.forward();
-		}
-	}
-
-	/**
-	 * Go backword for amount of number
-	 * @param n
-	 */
-	private backwordN(n:number) {
-		while (--n > 0) {
-			this.backward();
 		}
 	}
 
@@ -153,14 +154,6 @@ export class Lexer {
 	 */
 	private current():string {
 		return this.str.charAt(this.index);
-	}
-
-	/**
-	 * Get previous index string
-	 * @returns {string}
-	 */
-	private next():string {
-		return this.str.charAt(this.index + 1);
 	}
 
 	/**
@@ -252,21 +245,119 @@ export class Lexer {
 					this.collectOpenToken()
 				)
 			);
-		} else if (CHARS_WHITESPACE.test(this.current())) {
+		} else if (CHARS_WHITESPACE.test(this.current()) && !this.isCommentType()) {
 			this.token(
 				Tokens.WHITESPACE,
 				this.current()
 			);
-		} else if (this.peekNext('"')) {
+		} else if (this.peekNext('"') && !this.isCommentType()) {
 			this.token(
 				Tokens.STRING,
 				this.parseString('"')
 			);
-		} else if (this.peekNext('\'')) {
+		} else if (this.peekNext('\'') && !this.isCommentType()) {
 			this.token(
 				Tokens.STRING,
 				this.parseString('\'')
 			);
+		} else if (
+			!this.isCommentType() &&
+			CHARS_DELIMITER.test(this.current())
+		) {
+			let operators = [
+					'===', '!==', '==', '!=', '>=', '<=', '++',
+					'--', '>', '<', '+', '-', '*', '/', '%'
+				],
+				tok = this.current(),
+				type = null,
+				isOperator = false;
+
+			operators.forEach((token) => {
+				if (this.peekNext(token)) {
+					this.token(
+						Tokens.OPERATOR,
+						this.collect(token)
+					);
+					isOperator = true;
+				}
+			});
+
+			if (!isOperator) {
+				switch (tok) {
+					case '(':
+						type = Tokens.LEFT_PAREN;
+						break;
+					case ')':
+						type = Tokens.RIGHT_PAREN;
+						break;
+					case '[':
+						type = Tokens.LEFT_BRACKET;
+						break;
+					case ']':
+						type = Tokens.RIGHT_BRACKET;
+						break;
+					case '{':
+						type = Tokens.LEFT_CURLY;
+						break;
+					case '}':
+						type = Tokens.RIGHT_CURLY;
+						break;
+					case ',':
+						type = Tokens.COMMA;
+						break;
+					case ':':
+						type = Tokens.COLON;
+						break;
+					case '~':
+						type = Tokens.TILDE;
+						break;
+					case '|':
+						type = Tokens.PIPE;
+						break;
+					case '.':
+						type = Tokens.DOT;
+						break;
+					case '=':
+						type = Tokens.ASSIGNMENT;
+						break;
+					default:
+						throw new InvalidTokenError(
+							this.token(
+								Tokens.UNKNOWN,
+								tok
+							)
+						);
+				}
+				this.token(
+					type,
+					tok
+				);
+			}
+		} else if (!this.isCommentType()) {
+			let tok = this.collectUntil(CHARS_ALL);
+			if (CHARS_NUMBER.test(tok)) {
+				this.token(
+					Tokens.NUMBER,
+					tok
+				);
+			} else if (CHARS_BOOLEAN.test(tok)) {
+				this.token(
+					Tokens.BOOLEAN,
+					tok
+				);
+			} else if (!!tok) {
+				this.token(
+					Tokens.SYMBOL,
+					tok
+				);
+			} else { // technically this should not happen but if does i need to debug it :)
+				throw new InvalidTokenError(
+					this.token(
+						Tokens.UNKNOWN,
+						tok
+					)
+				);
+			}
 		}
 
 	}

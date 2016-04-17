@@ -1,4 +1,4 @@
-{% import    'macros' as macro %}
+{% import 'macros' as macro %}
 <!DOCTYPE html>
 <html lang="{{ isoLocale }}" itemscope itemtype="http://schema.org/WebPage">
 <head>
@@ -11,7 +11,14 @@
     {{ macro.flash_message('liked_product_notification') }}
     {% widget 'first-time-seen' %}
     {% widget "menu" %}
-
+    {% set a = {b: 1} %}
+    {% set b = [1, 2, {a: 1}] %}
+    {{ 1 +1 }}
+    {#
+      abc this is an comment <data vid ></data>
+      {% block before-content-wrapper %}{% endblock %}
+      {% block before-content-wrapper %}{% endblock %}
+    #}
     {% block before-content-wrapper %}{% endblock %}
     {% block main-content-header %} {% endblock %}
     <div class="cn-main">

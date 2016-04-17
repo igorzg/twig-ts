@@ -141,7 +141,7 @@ describe('Lexer', () => {
 			assert.equal(error, `Error: Invalid open token found at line: 2, 
 			column: 3, 
 			value: #},
-			tokenType: 8`);
+			tokenType: ${Tokens.COMMENT_END}`);
 			done();
 		}).catch(done);
 	});
@@ -151,7 +151,7 @@ describe('Lexer', () => {
 		{# and it should throw error`, new LexerOptions());
 		lexer.parse().then(null, (error) => {
 			assert.equal(error, `Error: Unexpected end of input, 
-			Token was opened with token:   at line 2 column 24,
+			Token was opened with token: {# at line 2 column 3,
 			expected END token should be found at line: 2, column: 29`);
 			done();
 		}).catch(done);
@@ -164,7 +164,7 @@ describe('Lexer', () => {
 			assert.equal(error, `Error: Invalid close token found at line: 2, 
 			column: 26, 
 			value: #},
-			tokenType: 3`);
+			tokenType: ${Tokens.BLOCK_START}`);
 			done();
 		}).catch(done);
 	});
@@ -176,7 +176,7 @@ describe('Lexer', () => {
 			assert.equal(error, `Error: Invalid token found at line: 2, 
 			column: 6, 
 			value: {%,
-			tokenType: 3`);
+			tokenType: ${Tokens.BLOCK_START}`);
 			done();
 		}).catch(done);
 	});
@@ -188,7 +188,7 @@ describe('Lexer', () => {
 			assert.equal(error, `Error: Invalid token found at line: 2, 
 			column: 6, 
 			value: {{,
-			tokenType: 5`);
+			tokenType: ${Tokens.VARIABLE_START}`);
 			done();
 		}).catch(done);
 	});

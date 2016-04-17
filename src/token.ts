@@ -1,14 +1,16 @@
-import {Tokens} from './tokens';
+import {Tokens, getTokenName} from './tokens';
 export class Token {
 	type:Tokens;
-	value:string;
+	value:any;
+	tokenName: string;
 	lineNumber:number;
 	columnNumber:number;
 
-	constructor(type:Tokens, value:string, lineNumber:number, columnNumber:number) {
+	constructor(type:Tokens, value:any, lineNumber:number, columnNumber:number) {
 		this.type = type;
 		this.value = value;
 		this.lineNumber = lineNumber;
 		this.columnNumber = columnNumber;
+		this.tokenName = getTokenName(type);
 	}
 }
