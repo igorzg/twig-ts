@@ -28,7 +28,7 @@ export class InvalidCloseTokenError extends Error {
 }
 
 export class TokenNotFoundError extends Error {
-	constructor(open:Token, close: Token) {
+	constructor(open:Token, close:Token) {
 		super(`Unexpected end of input, 
 			Token was opened with token: ${open.value} at line ${open.lineNumber} column ${open.columnNumber},
 			expected END token should be found at line: ${close.lineNumber}, column: ${close.columnNumber}`);

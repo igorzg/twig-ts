@@ -8,6 +8,6 @@ export interface ILexerOptions {
 	VARIABLE_END:string;
 	COMMENT_START:string;
 	COMMENT_END:string;
-	TRIM_BLOCKS: boolean;
-	LEFT_STRIP_BLOCKS: boolean;
+	TRIM_BLOCKS:boolean;
+	LEFT_STRIP_BLOCKS:boolean;
 }

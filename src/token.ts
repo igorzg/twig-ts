@@ -2,7 +2,7 @@ import {Tokens, getTokenName} from './tokens';
 export class Token {
 	type:Tokens;
 	value:any;
-	tokenName: string;
+	tokenName:string;
 	lineNumber:number;
 	columnNumber:number;
 

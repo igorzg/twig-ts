@@ -115,7 +115,7 @@ describe('Lexer', () => {
 			}
 		).catch(done);
 	});
-	
+
 	it('Should open and close comment', (done) => {
 		let template = `<div>{# this is some comment {{}} #}</div>`;
 		let lexer = new Lexer(template, new LexerOptions());

@@ -541,6 +541,6 @@ export class Lexer {
 			this.openToken();
 		}
 	}
-
+	
 }
 
