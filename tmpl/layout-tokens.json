@@ -1,0 +1,1752 @@
+[
+  {
+    "columnNumber": 2,
+    "lineNumber": 1,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 3,
+    "lineNumber": 1,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 9,
+    "lineNumber": 1,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "import"
+  },
+  {
+    "columnNumber": 10,
+    "lineNumber": 1,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 18,
+    "lineNumber": 1,
+    "tokenName": "STRING",
+    "type": 0,
+    "value": "macros"
+  },
+  {
+    "columnNumber": 19,
+    "lineNumber": 1,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 21,
+    "lineNumber": 1,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "as"
+  },
+  {
+    "columnNumber": 22,
+    "lineNumber": 1,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 27,
+    "lineNumber": 1,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "macro"
+  },
+  {
+    "columnNumber": 28,
+    "lineNumber": 1,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 30,
+    "lineNumber": 1,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 13,
+    "lineNumber": 3,
+    "tokenName": "VARIABLE_START",
+    "type": 4,
+    "value": "{{"
+  },
+  {
+    "columnNumber": 14,
+    "lineNumber": 3,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 23,
+    "lineNumber": 3,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "isoLocale"
+  },
+  {
+    "columnNumber": 24,
+    "lineNumber": 3,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 26,
+    "lineNumber": 3,
+    "tokenName": "VARIABLE_END",
+    "type": 5,
+    "value": "}}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 5,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 5,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 13,
+    "lineNumber": 5,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "include"
+  },
+  {
+    "columnNumber": 14,
+    "lineNumber": 5,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 36,
+    "lineNumber": 5,
+    "tokenName": "STRING",
+    "type": 0,
+    "value": "layouts/_common_head"
+  },
+  {
+    "columnNumber": 37,
+    "lineNumber": 5,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 39,
+    "lineNumber": 5,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 6,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 6,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 11,
+    "lineNumber": 6,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "block"
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 6,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 16,
+    "lineNumber": 6,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "head"
+  },
+  {
+    "columnNumber": 17,
+    "lineNumber": 6,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 24,
+    "lineNumber": 6,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "content"
+  },
+  {
+    "columnNumber": 25,
+    "lineNumber": 6,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 27,
+    "lineNumber": 6,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 29,
+    "lineNumber": 6,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 30,
+    "lineNumber": 6,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 38,
+    "lineNumber": 6,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "endblock"
+  },
+  {
+    "columnNumber": 39,
+    "lineNumber": 6,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 41,
+    "lineNumber": 6,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 14,
+    "lineNumber": 8,
+    "tokenName": "VARIABLE_START",
+    "type": 4,
+    "value": "{{"
+  },
+  {
+    "columnNumber": 15,
+    "lineNumber": 8,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 26,
+    "lineNumber": 8,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "bodyClasses"
+  },
+  {
+    "columnNumber": 27,
+    "lineNumber": 8,
+    "tokenName": "DOT",
+    "type": 16,
+    "value": "."
+  },
+  {
+    "columnNumber": 31,
+    "lineNumber": 8,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "join"
+  },
+  {
+    "columnNumber": 32,
+    "lineNumber": 8,
+    "tokenName": "LEFT_PAREN",
+    "type": 8,
+    "value": "("
+  },
+  {
+    "columnNumber": 35,
+    "lineNumber": 8,
+    "tokenName": "STRING",
+    "type": 0,
+    "value": " "
+  },
+  {
+    "columnNumber": 36,
+    "lineNumber": 8,
+    "tokenName": "RIGHT_PAREN",
+    "type": 9,
+    "value": ")"
+  },
+  {
+    "columnNumber": 37,
+    "lineNumber": 8,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 39,
+    "lineNumber": 8,
+    "tokenName": "VARIABLE_END",
+    "type": 5,
+    "value": "}}"
+  },
+  {
+    "columnNumber": 56,
+    "lineNumber": 8,
+    "tokenName": "VARIABLE_START",
+    "type": 4,
+    "value": "{{"
+  },
+  {
+    "columnNumber": 57,
+    "lineNumber": 8,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 67,
+    "lineNumber": 8,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "controller"
+  },
+  {
+    "columnNumber": 68,
+    "lineNumber": 8,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 70,
+    "lineNumber": 8,
+    "tokenName": "VARIABLE_END",
+    "type": 5,
+    "value": "}}"
+  },
+  {
+    "columnNumber": 83,
+    "lineNumber": 8,
+    "tokenName": "VARIABLE_START",
+    "type": 4,
+    "value": "{{"
+  },
+  {
+    "columnNumber": 84,
+    "lineNumber": 8,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 90,
+    "lineNumber": 8,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "action"
+  },
+  {
+    "columnNumber": 91,
+    "lineNumber": 8,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 93,
+    "lineNumber": 8,
+    "tokenName": "VARIABLE_END",
+    "type": 5,
+    "value": "}}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 11,
+    "tokenName": "VARIABLE_START",
+    "type": 4,
+    "value": "{{"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 11,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 11,
+    "lineNumber": 11,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "macro"
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 11,
+    "tokenName": "DOT",
+    "type": 16,
+    "value": "."
+  },
+  {
+    "columnNumber": 25,
+    "lineNumber": 11,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "flash_message"
+  },
+  {
+    "columnNumber": 26,
+    "lineNumber": 11,
+    "tokenName": "LEFT_PAREN",
+    "type": 8,
+    "value": "("
+  },
+  {
+    "columnNumber": 54,
+    "lineNumber": 11,
+    "tokenName": "STRING",
+    "type": 0,
+    "value": "liked_product_notification"
+  },
+  {
+    "columnNumber": 55,
+    "lineNumber": 11,
+    "tokenName": "RIGHT_PAREN",
+    "type": 9,
+    "value": ")"
+  },
+  {
+    "columnNumber": 56,
+    "lineNumber": 11,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 58,
+    "lineNumber": 11,
+    "tokenName": "VARIABLE_END",
+    "type": 5,
+    "value": "}}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 12,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 12,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 12,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "widget"
+  },
+  {
+    "columnNumber": 13,
+    "lineNumber": 12,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 30,
+    "lineNumber": 12,
+    "tokenName": "STRING",
+    "type": 0,
+    "value": "first-time-seen"
+  },
+  {
+    "columnNumber": 31,
+    "lineNumber": 12,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 33,
+    "lineNumber": 12,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 13,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 13,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 13,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "widget"
+  },
+  {
+    "columnNumber": 13,
+    "lineNumber": 13,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 19,
+    "lineNumber": 13,
+    "tokenName": "STRING",
+    "type": 0,
+    "value": "menu"
+  },
+  {
+    "columnNumber": 20,
+    "lineNumber": 13,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 22,
+    "lineNumber": 13,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 14,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 14,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 9,
+    "lineNumber": 14,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "set"
+  },
+  {
+    "columnNumber": 10,
+    "lineNumber": 14,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 11,
+    "lineNumber": 14,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "a"
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 14,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 13,
+    "lineNumber": 14,
+    "tokenName": "ASSIGNMENT",
+    "type": 17,
+    "value": "="
+  },
+  {
+    "columnNumber": 14,
+    "lineNumber": 14,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 15,
+    "lineNumber": 14,
+    "tokenName": "LEFT_CURLY",
+    "type": 12,
+    "value": "{"
+  },
+  {
+    "columnNumber": 16,
+    "lineNumber": 14,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "b"
+  },
+  {
+    "columnNumber": 17,
+    "lineNumber": 14,
+    "tokenName": "COLON",
+    "type": 18,
+    "value": ":"
+  },
+  {
+    "columnNumber": 18,
+    "lineNumber": 14,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 19,
+    "lineNumber": 14,
+    "tokenName": "NUMBER",
+    "type": 21,
+    "value": "1"
+  },
+  {
+    "columnNumber": 20,
+    "lineNumber": 14,
+    "tokenName": "RIGHT_CURLY",
+    "type": 13,
+    "value": "}"
+  },
+  {
+    "columnNumber": 21,
+    "lineNumber": 14,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 23,
+    "lineNumber": 14,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 15,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 15,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 9,
+    "lineNumber": 15,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "set"
+  },
+  {
+    "columnNumber": 10,
+    "lineNumber": 15,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 11,
+    "lineNumber": 15,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "b"
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 15,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 13,
+    "lineNumber": 15,
+    "tokenName": "ASSIGNMENT",
+    "type": 17,
+    "value": "="
+  },
+  {
+    "columnNumber": 14,
+    "lineNumber": 15,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 15,
+    "lineNumber": 15,
+    "tokenName": "LEFT_BRACKET",
+    "type": 10,
+    "value": "["
+  },
+  {
+    "columnNumber": 16,
+    "lineNumber": 15,
+    "tokenName": "NUMBER",
+    "type": 21,
+    "value": "1"
+  },
+  {
+    "columnNumber": 17,
+    "lineNumber": 15,
+    "tokenName": "COMMA",
+    "type": 15,
+    "value": ","
+  },
+  {
+    "columnNumber": 18,
+    "lineNumber": 15,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 19,
+    "lineNumber": 15,
+    "tokenName": "NUMBER",
+    "type": 21,
+    "value": "2"
+  },
+  {
+    "columnNumber": 20,
+    "lineNumber": 15,
+    "tokenName": "COMMA",
+    "type": 15,
+    "value": ","
+  },
+  {
+    "columnNumber": 21,
+    "lineNumber": 15,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 22,
+    "lineNumber": 15,
+    "tokenName": "LEFT_CURLY",
+    "type": 12,
+    "value": "{"
+  },
+  {
+    "columnNumber": 23,
+    "lineNumber": 15,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "a"
+  },
+  {
+    "columnNumber": 24,
+    "lineNumber": 15,
+    "tokenName": "COLON",
+    "type": 18,
+    "value": ":"
+  },
+  {
+    "columnNumber": 25,
+    "lineNumber": 15,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 26,
+    "lineNumber": 15,
+    "tokenName": "NUMBER",
+    "type": 21,
+    "value": "1"
+  },
+  {
+    "columnNumber": 27,
+    "lineNumber": 15,
+    "tokenName": "RIGHT_CURLY",
+    "type": 13,
+    "value": "}"
+  },
+  {
+    "columnNumber": 28,
+    "lineNumber": 15,
+    "tokenName": "RIGHT_BRACKET",
+    "type": 11,
+    "value": "]"
+  },
+  {
+    "columnNumber": 29,
+    "lineNumber": 15,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 31,
+    "lineNumber": 15,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 16,
+    "tokenName": "VARIABLE_START",
+    "type": 4,
+    "value": "{{"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 16,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 7,
+    "lineNumber": 16,
+    "tokenName": "NUMBER",
+    "type": 21,
+    "value": "1"
+  },
+  {
+    "columnNumber": 8,
+    "lineNumber": 16,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 9,
+    "lineNumber": 16,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "+"
+  },
+  {
+    "columnNumber": 10,
+    "lineNumber": 16,
+    "tokenName": "NUMBER",
+    "type": 21,
+    "value": "1"
+  },
+  {
+    "columnNumber": 11,
+    "lineNumber": 16,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 16,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "+"
+  },
+  {
+    "columnNumber": 13,
+    "lineNumber": 16,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 16,
+    "lineNumber": 16,
+    "tokenName": "NUMBER",
+    "type": 21,
+    "value": "345"
+  },
+  {
+    "columnNumber": 17,
+    "lineNumber": 16,
+    "tokenName": "DOT",
+    "type": 16,
+    "value": "."
+  },
+  {
+    "columnNumber": 19,
+    "lineNumber": 16,
+    "tokenName": "NUMBER",
+    "type": 21,
+    "value": "05"
+  },
+  {
+    "columnNumber": 21,
+    "lineNumber": 16,
+    "tokenName": "VARIABLE_END",
+    "type": 5,
+    "value": "}}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 17,
+    "tokenName": "COMMENT_START",
+    "type": 6,
+    "value": "{#"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 21,
+    "tokenName": "COMMENT_END",
+    "type": 7,
+    "value": "#}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 22,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 22,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 11,
+    "lineNumber": 22,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "block"
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 22,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 18,
+    "lineNumber": 22,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "before"
+  },
+  {
+    "columnNumber": 19,
+    "lineNumber": 22,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 26,
+    "lineNumber": 22,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "content"
+  },
+  {
+    "columnNumber": 27,
+    "lineNumber": 22,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 34,
+    "lineNumber": 22,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "wrapper"
+  },
+  {
+    "columnNumber": 35,
+    "lineNumber": 22,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 37,
+    "lineNumber": 22,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 39,
+    "lineNumber": 22,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 40,
+    "lineNumber": 22,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 48,
+    "lineNumber": 22,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "endblock"
+  },
+  {
+    "columnNumber": 49,
+    "lineNumber": 22,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 51,
+    "lineNumber": 22,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 23,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 23,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 11,
+    "lineNumber": 23,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "block"
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 23,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 16,
+    "lineNumber": 23,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "main"
+  },
+  {
+    "columnNumber": 17,
+    "lineNumber": 23,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 24,
+    "lineNumber": 23,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "content"
+  },
+  {
+    "columnNumber": 25,
+    "lineNumber": 23,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 31,
+    "lineNumber": 23,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "header"
+  },
+  {
+    "columnNumber": 32,
+    "lineNumber": 23,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 34,
+    "lineNumber": 23,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 37,
+    "lineNumber": 23,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 38,
+    "lineNumber": 23,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 46,
+    "lineNumber": 23,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "endblock"
+  },
+  {
+    "columnNumber": 47,
+    "lineNumber": 23,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 49,
+    "lineNumber": 23,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 9,
+    "lineNumber": 25,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 10,
+    "lineNumber": 25,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 15,
+    "lineNumber": 25,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "block"
+  },
+  {
+    "columnNumber": 16,
+    "lineNumber": 25,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 21,
+    "lineNumber": 25,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "first"
+  },
+  {
+    "columnNumber": 22,
+    "lineNumber": 25,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 24,
+    "lineNumber": 25,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "in"
+  },
+  {
+    "columnNumber": 25,
+    "lineNumber": 25,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 32,
+    "lineNumber": 25,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "content"
+  },
+  {
+    "columnNumber": 33,
+    "lineNumber": 25,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 40,
+    "lineNumber": 25,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "wrapper"
+  },
+  {
+    "columnNumber": 41,
+    "lineNumber": 25,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 43,
+    "lineNumber": 25,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 45,
+    "lineNumber": 25,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 46,
+    "lineNumber": 25,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 54,
+    "lineNumber": 25,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "endblock"
+  },
+  {
+    "columnNumber": 55,
+    "lineNumber": 25,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 57,
+    "lineNumber": 25,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 9,
+    "lineNumber": 26,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 10,
+    "lineNumber": 26,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 15,
+    "lineNumber": 26,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "block"
+  },
+  {
+    "columnNumber": 16,
+    "lineNumber": 26,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 23,
+    "lineNumber": 26,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "content"
+  },
+  {
+    "columnNumber": 24,
+    "lineNumber": 26,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 26,
+    "lineNumber": 26,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 28,
+    "lineNumber": 26,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 29,
+    "lineNumber": 26,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 37,
+    "lineNumber": 26,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "endblock"
+  },
+  {
+    "columnNumber": 38,
+    "lineNumber": 26,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 40,
+    "lineNumber": 26,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 9,
+    "lineNumber": 27,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 10,
+    "lineNumber": 27,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 15,
+    "lineNumber": 27,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "block"
+  },
+  {
+    "columnNumber": 16,
+    "lineNumber": 27,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 20,
+    "lineNumber": 27,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "last"
+  },
+  {
+    "columnNumber": 21,
+    "lineNumber": 27,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 23,
+    "lineNumber": 27,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "in"
+  },
+  {
+    "columnNumber": 24,
+    "lineNumber": 27,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 31,
+    "lineNumber": 27,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "content"
+  },
+  {
+    "columnNumber": 32,
+    "lineNumber": 27,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 39,
+    "lineNumber": 27,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "wrapper"
+  },
+  {
+    "columnNumber": 40,
+    "lineNumber": 27,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 42,
+    "lineNumber": 27,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 44,
+    "lineNumber": 27,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 45,
+    "lineNumber": 27,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 53,
+    "lineNumber": 27,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "endblock"
+  },
+  {
+    "columnNumber": 54,
+    "lineNumber": 27,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 56,
+    "lineNumber": 27,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 29,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 29,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 11,
+    "lineNumber": 29,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "block"
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 29,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 17,
+    "lineNumber": 29,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "after"
+  },
+  {
+    "columnNumber": 18,
+    "lineNumber": 29,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 25,
+    "lineNumber": 29,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "content"
+  },
+  {
+    "columnNumber": 26,
+    "lineNumber": 29,
+    "tokenName": "OPERATOR",
+    "type": 14,
+    "value": "-"
+  },
+  {
+    "columnNumber": 33,
+    "lineNumber": 29,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "wrapper"
+  },
+  {
+    "columnNumber": 34,
+    "lineNumber": 29,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 36,
+    "lineNumber": 29,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 38,
+    "lineNumber": 29,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 39,
+    "lineNumber": 29,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 47,
+    "lineNumber": 29,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "endblock"
+  },
+  {
+    "columnNumber": 48,
+    "lineNumber": 29,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 50,
+    "lineNumber": 29,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 31,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 31,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 31,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "widget"
+  },
+  {
+    "columnNumber": 13,
+    "lineNumber": 31,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 21,
+    "lineNumber": 31,
+    "tokenName": "STRING",
+    "type": 0,
+    "value": "footer"
+  },
+  {
+    "columnNumber": 22,
+    "lineNumber": 31,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 24,
+    "lineNumber": 31,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  },
+  {
+    "columnNumber": 1,
+    "lineNumber": 36,
+    "tokenName": "BLOCK_START",
+    "type": 2,
+    "value": "{%"
+  },
+  {
+    "columnNumber": 2,
+    "lineNumber": 36,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 5,
+    "lineNumber": 36,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "set"
+  },
+  {
+    "columnNumber": 6,
+    "lineNumber": 36,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 10,
+    "lineNumber": 36,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "test"
+  },
+  {
+    "columnNumber": 11,
+    "lineNumber": 36,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 12,
+    "lineNumber": 36,
+    "tokenName": "ASSIGNMENT",
+    "type": 17,
+    "value": "="
+  },
+  {
+    "columnNumber": 13,
+    "lineNumber": 36,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 17,
+    "lineNumber": 36,
+    "tokenName": "BOOLEAN",
+    "type": 22,
+    "value": "true"
+  },
+  {
+    "columnNumber": 18,
+    "lineNumber": 36,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 20,
+    "lineNumber": 36,
+    "tokenName": "BLOCK_END",
+    "type": 3,
+    "value": "%}"
+  }
+]
