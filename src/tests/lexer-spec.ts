@@ -1,6 +1,6 @@
 import {Lexer} from '../lexer';
 import {LexerOptions} from '../lexeroptions';
-import {Tokens} from '../tokens';
+import {Tokens, getTokenName} from '../tokens';
 import {readFileSync} from 'fs';
 import {InvalidTokenError} from '../error';
 import {assert} from 'chai';
@@ -149,7 +149,8 @@ describe('Lexer', () => {
 			assert.equal(error, `Error: Invalid open token found at line: 2, 
 			column: 3, 
 			value: #},
-			tokenType: ${Tokens.COMMENT_END}`);
+			tokenType: ${Tokens.COMMENT_END},
+			tokenName: ${getTokenName(Tokens.COMMENT_END)}`);
 			done();
 		}).catch(done);
 	});
@@ -172,7 +173,8 @@ describe('Lexer', () => {
 			assert.equal(error, `Error: Invalid close token found at line: 2, 
 			column: 26, 
 			value: #},
-			tokenType: ${Tokens.BLOCK_START}`);
+			tokenType: ${Tokens.BLOCK_START},
+			tokenName: ${getTokenName(Tokens.BLOCK_START)}`);
 			done();
 		}).catch(done);
 	});
@@ -184,7 +186,8 @@ describe('Lexer', () => {
 			assert.equal(error, `Error: Invalid token found at line: 2, 
 			column: 6, 
 			value: {%,
-			tokenType: ${Tokens.BLOCK_START}`);
+			tokenType: ${Tokens.BLOCK_START},
+			tokenName: ${getTokenName(Tokens.BLOCK_START)}`);
 			done();
 		}).catch(done);
 	});
@@ -196,7 +199,8 @@ describe('Lexer', () => {
 			assert.equal(error, `Error: Invalid token found at line: 2, 
 			column: 6, 
 			value: {{,
-			tokenType: ${Tokens.VARIABLE_START}`);
+			tokenType: ${Tokens.VARIABLE_START},
+			tokenName: ${getTokenName(Tokens.VARIABLE_START)}`);
 			done();
 		}).catch(done);
 	});

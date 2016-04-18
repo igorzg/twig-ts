@@ -5,7 +5,8 @@ export class InvalidTokenError extends Error {
 		super(`Invalid token found at line: ${token.lineNumber}, 
 			column: ${token.columnNumber}, 
 			value: ${token.value},
-			tokenType: ${token.type}`);
+			tokenType: ${token.type},
+			tokenName: ${token.tokenName}`);
 	}
 }
 
@@ -14,7 +15,8 @@ export class InvalidOpenTokenError extends Error {
 		super(`Invalid open token found at line: ${token.lineNumber}, 
 			column: ${token.columnNumber}, 
 			value: ${token.value},
-			tokenType: ${token.type}`);
+			tokenType: ${token.type},
+			tokenName: ${token.tokenName}`);
 	}
 }
 
@@ -23,7 +25,8 @@ export class InvalidCloseTokenError extends Error {
 		super(`Invalid close token found at line: ${token.lineNumber}, 
 			column: ${token.columnNumber}, 
 			value: ${token.value},
-			tokenType: ${token.type}`);
+			tokenType: ${token.type},
+			tokenName: ${token.tokenName}`);
 	}
 }
 

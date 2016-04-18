@@ -14,9 +14,13 @@
   "files": [
     "src/core.ts",
     "src/lexer.ts",
+    "src/lexeroptions.ts",
+    "src/parser.ts",
+    "src/token.ts",
     "src/tokens.ts",
     "typings/main.d.ts",
-    "src/tests/lexer-spec.ts"
+    "src/tests/lexer-spec.ts",
+    "src/tests/parser-spec.ts"
   ],
   "compileOnSave": true
 }
