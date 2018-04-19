@@ -1,5 +1,4 @@
 {
-  "version": "1.8.9",
   "compilerOptions": {
     "target": "ES6",
     "module": "commonjs",
@@ -9,18 +8,18 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "removeComments": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   },
-  "files": [
-    "src/core.ts",
-    "src/lexer.ts",
-    "src/lexeroptions.ts",
-    "src/parser.ts",
-    "src/token.ts",
-    "src/tokens.ts",
-    "typings/main.d.ts",
-    "src/tests/lexer-spec.ts",
-    "src/tests/parser-spec.ts"
+  "include": [
+    "src/**/*",
+    "src/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/*-spec.ts"
   ],
   "compileOnSave": true
 }

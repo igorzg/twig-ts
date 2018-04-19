@@ -11,39 +11,6 @@ export function uuid() {
 		return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
 	});
 }
-
-/**
- * Async function
- * @param genFunc Generator
- * @returns {Function}
- */
-export function async(genFunc):Promise<any> {
-	let generator = genFunc();
-
-	try {
-		return _handleAsync(generator.next());
-	} catch (e) {
-		return Promise.reject(e);
-	}
-	/**
-	 * Handler async
-	 * @param item
-	 * @returns {any}
-	 * @private
-	 */
-	function _handleAsync(item) {
-		if (item.done) {
-			return Promise.resolve(item.value);
-		}
-		return Promise
-			.resolve(item.value)
-			.then(
-				val => _handleAsync(generator.next(val)),
-				e => _handleAsync(generator.throw(e))
-			);
-	}
-
-}
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
