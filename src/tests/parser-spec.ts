@@ -14,7 +14,7 @@ describe("Parser", () => {
       (data) => {
         let t2 = (new Date()).getTime();
         console.log("TIME", +(t2 - t1));
-        assert.equal(data.tokens.length, 250);
+        assert.equal(data.tokens.length, 253);
         let parser = new Parser(data.str, data.tokens, []);
         return parser.parse();
       }

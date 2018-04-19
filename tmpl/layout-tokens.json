@@ -450,9 +450,9 @@
   {
     "columnNumber": 55,
     "lineNumber": 11,
-    "tokenName": "RIGHT_PAREN",
-    "type": 9,
-    "value": ")"
+    "tokenName": "COMMA",
+    "type": 15,
+    "value": ","
   },
   {
     "columnNumber": 56,
@@ -462,7 +462,28 @@
     "value": " "
   },
   {
-    "columnNumber": 58,
+    "columnNumber": 66,
+    "lineNumber": 11,
+    "tokenName": "SYMBOL",
+    "type": 23,
+    "value": "controller"
+  },
+  {
+    "columnNumber": 67,
+    "lineNumber": 11,
+    "tokenName": "RIGHT_PAREN",
+    "type": 9,
+    "value": ")"
+  },
+  {
+    "columnNumber": 68,
+    "lineNumber": 11,
+    "tokenName": "WHITESPACE",
+    "type": 1,
+    "value": " "
+  },
+  {
+    "columnNumber": 70,
     "lineNumber": 11,
     "tokenName": "VARIABLE_END",
     "type": 5,

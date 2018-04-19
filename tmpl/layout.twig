@@ -8,7 +8,7 @@
 <body class="{{ bodyClasses.join(' ') }} cn-controller-{{ controller }} cn-action-{{ action }}">
 
 <div data-cn-body-wrapper class="cn-body-wrapper">
-    {{ macro.flash_message('liked_product_notification') }}
+    {{ macro.flash_message('liked_product_notification', controller) }}
     {% widget 'first-time-seen' %}
     {% widget "menu" %}
     {% set a = {b: 1} %}

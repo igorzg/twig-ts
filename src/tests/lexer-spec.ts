@@ -17,7 +17,7 @@ describe("Lexer", () => {
       lexer1.scan().then(
         (data) => {
           assert.deepEqual(data.tokens, layoutTokens);
-          assert.equal(data.tokens.length, 250);
+          assert.equal(data.tokens.length, 253);
         }
       )
     ])

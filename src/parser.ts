@@ -5,15 +5,9 @@ import {InvalidTokenError} from "./error";
  * Parser class
  */
 export class Parser {
-  private tokens: Array<Token> = [];
-  private instructions: Array<any> = [];
-  private str: string;
   private openToken: Tokens = null;
 
-  constructor(str: string, tokens: Array<Token>, instructions: Array<any>) {
-    this.str = str;
-    this.tokens = tokens;
-    this.instructions = instructions;
+  constructor(private str: string, private tokens: Array<Token>, private instructions: Array<any>) {
   }
 
   /**
