@@ -4,13 +4,14 @@
  * @returns {string}
  */
 export function uuid() {
-	let d = new Date().getTime();
-	return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-		let r = (d + Math.random() * 16) % 16 | 0;
-		d = Math.floor(d / 16);
-		return (c == "x" ? r : (r & 0x3 | 0x8)).toString(16);
-	});
+  let d = new Date().getTime();
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    let r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c === "x" ? r : (r & 0x3 | 0x8)).toString(16);
+  });
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -20,8 +21,9 @@ export function uuid() {
  * Check if value is boolean
  */
 export function isBoolean(value) {
-	return typeof value === "boolean";
+  return typeof value === "boolean";
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -31,8 +33,9 @@ export function isBoolean(value) {
  * Check if value is un-defined
  */
 export function isUndefined(value) {
-	return typeof value === "undefined";
+  return typeof value === "undefined";
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -42,8 +45,9 @@ export function isUndefined(value) {
  * Check if value is string
  */
 export function isString(value) {
-	return typeof value === "string";
+  return typeof value === "string";
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -53,8 +57,9 @@ export function isString(value) {
  * Check if value is isNumber
  */
 export function isNumber(value) {
-	return typeof value === "number" && !isNaN(value);
+  return typeof value === "number" && !isNaN(value);
 }
+
 /**
  * Internal is number
  * @param value
@@ -62,8 +67,9 @@ export function isNumber(value) {
  * @private
  */
 function _isNumber(value) {
-	return typeof value === "number";
+  return typeof value === "number";
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -73,8 +79,9 @@ function _isNumber(value) {
  * Check if value is array
  */
 export function isArray(value) {
-	return Array.isArray(value);
+  return Array.isArray(value);
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -84,8 +91,9 @@ export function isArray(value) {
  * Check if value is funciton
  */
 export function isNull(value) {
-	return value === null;
+  return value === null;
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -95,8 +103,9 @@ export function isNull(value) {
  * Check if value is funciton
  */
 export function isFunction(value) {
-	return typeof value === "function";
+  return typeof value === "function";
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -106,8 +115,9 @@ export function isFunction(value) {
  * Check if value is array
  */
 export function isDate(value) {
-	return Object.prototype.toString.call(value) === "[object Date]";
+  return Object.prototype.toString.call(value) === "[object Date]";
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -117,8 +127,9 @@ export function isDate(value) {
  * Check if object is an regular expression
  */
 export function isRegExp(value) {
-	return Object.prototype.toString.call(value) === "[object RegExp]";
+  return Object.prototype.toString.call(value) === "[object RegExp]";
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -128,7 +139,7 @@ export function isRegExp(value) {
  * Check if value is object
  */
 export function isObject(value) {
-	return !isNull(value) && typeof value === "object";
+  return !isNull(value) && typeof value === "object";
 }
 
 /**
@@ -140,8 +151,9 @@ export function isObject(value) {
  * Check if value is object
  */
 export function isInitialized(value) {
-	return !isNull(value) && !isUndefined(value);
+  return !isNull(value) && !isUndefined(value);
 }
+
 /**
  * @since 0.0.1
  * @author Igor Ivanovic
@@ -151,62 +163,62 @@ export function isInitialized(value) {
  * Check if two objects are equal
  */
 export function isEqual(a, b) {
-	if (isString(a)) {
-		return a === b;
-	} else if (_isNumber(a)) {
-		if (isNaN(a) || isNaN(b)) {
-			return isNaN(a) === isNaN(b);
-		}
-		return a === b;
-	} else if (isBoolean(a)) {
-		return a === b;
-	} else if (isDate(a)) {
-		return a.getTime() === b.getTime();
-	} else if (isRegExp(a)) {
-		return a.source === b.source;
-	} else if (isArray(a) && isArray(b)) {
+  if (isString(a)) {
+    return a === b;
+  } else if (_isNumber(a)) {
+    if (isNaN(a) || isNaN(b)) {
+      return isNaN(a) === isNaN(b);
+    }
+    return a === b;
+  } else if (isBoolean(a)) {
+    return a === b;
+  } else if (isDate(a)) {
+    return a.getTime() === b.getTime();
+  } else if (isRegExp(a)) {
+    return a.source === b.source;
+  } else if (isArray(a) && isArray(b)) {
 
-		// check references first
-		if (a === b) {
-			return true;
-		} else if (a.constructor.name !== b.constructor.name) {
-			return false;
-		}
+    // check references first
+    if (a === b) {
+      return true;
+    } else if (a.constructor.name !== b.constructor.name) {
+      return false;
+    }
 
-		try {
-			if (a.length !== b.length) {
-				return false;
-			}
-			return a.every((item, index) => isEqual(item, b[index]));
-		} catch (e) {
-			throw e;
-		}
-	} else if (isObject(a) && isObject(b)) {
-		let equal = [];
-		// check references first
+    try {
+      if (a.length !== b.length) {
+        return false;
+      }
+      return a.every((item, index) => isEqual(item, b[index]));
+    } catch (e) {
+      throw e;
+    }
+  } else if (isObject(a) && isObject(b)) {
+    let equal = [];
+    // check references first
 
-		if (a === b) {
-			return true;
-		} else if (a.constructor.name !== b.constructor.name) {
-			return false;
-		}
+    if (a === b) {
+      return true;
+    } else if (a.constructor.name !== b.constructor.name) {
+      return false;
+    }
 
-		try {
-			if (Object.keys(a).length === Object.keys(b).length) {
-				Object.keys(a).forEach(key => equal.push(isEqual(a[key], b[key])));
-			}
-		} catch (e) {
-			throw e;
-		}
+    try {
+      if (Object.keys(a).length === Object.keys(b).length) {
+        Object.keys(a).forEach(key => equal.push(isEqual(a[key], b[key])));
+      }
+    } catch (e) {
+      throw e;
+    }
 
-		if (equal.length === 0) {
-			return false;
-		}
-		return equal.every((item) => item === true);
-		/// compare undefined and nulls
-	} else if (a === b) {
-		return true;
-	}
+    if (equal.length === 0) {
+      return false;
+    }
+    return equal.every((item) => item === true);
+    /// compare undefined and nulls
+  } else if (a === b) {
+    return true;
+  }
 
-	return false;
+  return false;
 }

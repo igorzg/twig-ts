@@ -30,6 +30,16 @@ export class InvalidCloseTokenError extends Error {
   }
 }
 
+export class CloseTokenError extends Error {
+  constructor(token: Token) {
+    super(`Token not closed error, token opened at line: ${token.lineNumber}, 
+      column: ${token.columnNumber}, 
+      value: ${token.value},
+      tokenType: ${token.type},
+      tokenName: ${token.tokenName}`);
+  }
+}
+
 export class TokenNotFoundError extends Error {
   constructor(open: Token, close: Token) {
     super(`Unexpected end of input, 

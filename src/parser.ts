@@ -22,7 +22,7 @@ export class Parser {
    */
   async parse(): Promise<any> {
     while (this.tokens.length > 0) {
-      return await this.nextToken();
+      await this.nextToken();
     }
     return Promise.resolve(null);
   }

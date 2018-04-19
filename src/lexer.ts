@@ -5,7 +5,7 @@ import {
   InvalidTokenError,
   InvalidCloseTokenError,
   TokenNotFoundError,
-  InvalidOpenTokenError
+  InvalidOpenTokenError, CloseTokenError
 } from "./error";
 import {ILexerOptions} from "./interfaces/ilexeroptions";
 
@@ -20,43 +20,69 @@ const CHAR_NEW_LINE = "\n";
  * Lexer class
  */
 export class Lexer {
-  private str: string;
-  private opts: ILexerOptions;
+  private readonly length: number;
   private index: number = 0;
   private lineNumber: number = 1;
   private columnNumber: number = 1;
-  private length: number;
   private tokens: Array<Token> = [];
   private tokenType: Tokens = null;
+
+  /**
+   * Parse twig file
+   * @param {string} str
+   * @returns {Lexer}
+   */
+  static scan(str: string) {
+    return new Lexer(str, new LexerOptions());
+  }
 
   /**
    * Constructor
    * @param str
    * @param opts
    */
-  constructor(str: string, opts: ILexerOptions) {
-    this.str = str;
+  constructor(private readonly str: string, private readonly opts: ILexerOptions) {
     this.length = str.length;
-    if (opts instanceof LexerOptions) {
-      this.opts = opts;
-    } else {
-      this.opts = new LexerOptions();
-    }
   }
 
   /**
    * Get parsed tokens
    * @returns {Promise<any>}
    */
-  async parse(): Promise<{ str: string, tokens: Array<Token> }> {
+  async scan(): Promise<{ str: string, tokens: Array<Token> }> {
     while (this.index < this.length) {
       await this.nextToken();
       this.forward();
     }
+
+    if (!isNull(this.tokenType)) {
+      throw new CloseTokenError(this.getLastOpenToken());
+    }
+
     return await {
       str: this.str,
       tokens: this.tokens
     };
+  }
+
+  /**
+   * Last open token
+   * @returns {Token}
+   */
+  private getLastOpenToken(): Token {
+    let tokens = this.tokens.slice();
+    while (tokens.length > 0) {
+      let token = tokens.pop();
+      if ([Tokens.BLOCK_START, Tokens.VARIABLE_START, Tokens.COMMENT_START].indexOf(token.type) > -1) {
+        return token;
+      }
+    }
+    return new Token(
+      Tokens.UNKNOWN,
+      null,
+      this.lineNumber,
+      this.columnNumber
+    );
   }
 
   /**

@@ -14,14 +14,14 @@ describe("Lexer", () => {
     let t1 = (new Date()).getTime();
     let lexer1 = new Lexer(layout, new LexerOptions());
     Promise.all([
-      lexer1.parse().then(
+      lexer1.scan().then(
         (data) => {
           assert.deepEqual(data.tokens, layoutTokens);
           assert.equal(data.tokens.length, 250);
         }
       )
     ])
-      .then((data) => {
+      .then(() => {
         let t2 = (new Date()).getTime();
         console.log("TIME", +(t2 - t1));
         done();
@@ -36,28 +36,28 @@ describe("Lexer", () => {
 
   it("Should open and close block", (done) => {
     let template = `<div>
-			     {% %}
-		</div>`;
+             {% %}
+    </div>`;
     let lexer = new Lexer(template, new LexerOptions());
-    lexer.parse().then(
+    lexer.scan().then(
       (data) => {
         assert.deepEqual(data.tokens, [
           {
-            columnNumber: 9,
+            columnNumber: 14,
             lineNumber: 2,
             tokenName: "BLOCK_START",
             type: Tokens.BLOCK_START,
             value: "{%"
           },
           {
-            columnNumber: 10,
+            columnNumber: 15,
             lineNumber: 2,
             tokenName: "WHITESPACE",
             type: Tokens.WHITESPACE,
             value: " "
           },
           {
-            columnNumber: 12,
+            columnNumber: 17,
             lineNumber: 2,
             tokenName: "BLOCK_END",
             type: Tokens.BLOCK_END,
@@ -72,7 +72,7 @@ describe("Lexer", () => {
   it("Should open and close variable", (done) => {
     let template = `<div>{{ value }}</div>`;
     let lexer = new Lexer(template, new LexerOptions());
-    lexer.parse().then(
+    lexer.scan().then(
       (data) => {
         assert.deepEqual(data.tokens, [
           {
@@ -119,7 +119,7 @@ describe("Lexer", () => {
   it("Should open and close comment", (done) => {
     let template = `<div>{# this is some comment {{}} #}</div>`;
     let lexer = new Lexer(template, new LexerOptions());
-    lexer.parse().then(
+    lexer.scan().then(
       (data) => {
         assert.deepEqual(data.tokens, [
           {
@@ -144,7 +144,7 @@ describe("Lexer", () => {
 
   it("Should throw InvalidOpenTokenError", (done) => {
     let lexer = new Lexer(`This is an test #} and it should throw error`, new LexerOptions());
-    lexer.parse().then(null, (error) => {
+    lexer.scan().then(null, (error) => {
       assertErrorContains(error, "Invalid open token found at line: 1");
       assertErrorContains(error, "column: 18");
       assertErrorContains(error, "value: #}");
@@ -157,7 +157,7 @@ describe("Lexer", () => {
   it("Should throw TokenNotFoundError", (done) => {
     let lexer = new Lexer(`This is an test 
     {# and it should throw error`, new LexerOptions());
-    lexer.parse().then(null, (error) => {
+    lexer.scan().then(null, (error) => {
       assertErrorContains(error, "Unexpected end of input");
       assertErrorContains(error, "Token was opened with token: {# at line 2 column 5");
       assertErrorContains(error, "expected END token should be found at line: 2, column: 31");
@@ -168,7 +168,7 @@ describe("Lexer", () => {
   it("Should throw InvalidCloseTokenError", (done) => {
     let lexer = new Lexer(`This is an test 
     {% and it should throw #} error`, new LexerOptions());
-    lexer.parse().then(null, (error) => {
+    lexer.scan().then(null, (error) => {
       assertErrorContains(error, "Invalid close token found at line: 2");
       assertErrorContains(error, "column: 28");
       assertErrorContains(error, "value: #}");
@@ -181,7 +181,7 @@ describe("Lexer", () => {
   it("Should throw InvalidTokenError {%", (done) => {
     let lexer = new Lexer(`This is an test 
     {% {% token %} and it should throw  error`, new LexerOptions());
-    lexer.parse().then(null, (error) => {
+    lexer.scan().then(null, (error) => {
       assertErrorContains(error, "Invalid token found at line: 2");
       assertErrorContains(error, "column: 8");
       assertErrorContains(error, "value: {%");
@@ -194,7 +194,7 @@ describe("Lexer", () => {
   it("Should throw InvalidTokenError {{", (done) => {
     let lexer = new Lexer(`This is an test 
     {{ {{ token }} and it should throw  error`, new LexerOptions());
-    lexer.parse().then(null, (error) => {
+    lexer.scan().then(null, (error) => {
       assertErrorContains(error, "Invalid token found at line: 2");
       assertErrorContains(error, "column: 8");
       assertErrorContains(error, "value: {{");

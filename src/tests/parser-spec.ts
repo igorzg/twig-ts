@@ -7,10 +7,10 @@ import {assert} from "chai";
 let layout = readFileSync(__dirname + "/../../tmpl/layout.twig", "utf-8");
 
 describe("Parser", () => {
-  it("Should parse tokens from lexer", (done) => {
+  it("Should scan tokens from lexer", (done) => {
     let t1 = (new Date()).getTime();
     let lexer = new Lexer(layout, new LexerOptions());
-    lexer.parse().then(
+    lexer.scan().then(
       (data) => {
         let t2 = (new Date()).getTime();
         console.log("TIME", +(t2 - t1));
