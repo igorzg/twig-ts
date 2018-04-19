@@ -5,10 +5,10 @@
  */
 export function uuid() {
 	let d = new Date().getTime();
-	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+	return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
 		let r = (d + Math.random() * 16) % 16 | 0;
 		d = Math.floor(d / 16);
-		return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+		return (c == "x" ? r : (r & 0x3 | 0x8)).toString(16);
 	});
 }
 /**
@@ -20,7 +20,7 @@ export function uuid() {
  * Check if value is boolean
  */
 export function isBoolean(value) {
-	return typeof value === 'boolean';
+	return typeof value === "boolean";
 }
 /**
  * @since 0.0.1
@@ -31,7 +31,7 @@ export function isBoolean(value) {
  * Check if value is un-defined
  */
 export function isUndefined(value) {
-	return typeof value === 'undefined';
+	return typeof value === "undefined";
 }
 /**
  * @since 0.0.1
@@ -42,7 +42,7 @@ export function isUndefined(value) {
  * Check if value is string
  */
 export function isString(value) {
-	return typeof value === 'string';
+	return typeof value === "string";
 }
 /**
  * @since 0.0.1
@@ -53,7 +53,7 @@ export function isString(value) {
  * Check if value is isNumber
  */
 export function isNumber(value) {
-	return typeof value === 'number' && !isNaN(value);
+	return typeof value === "number" && !isNaN(value);
 }
 /**
  * Internal is number
@@ -62,7 +62,7 @@ export function isNumber(value) {
  * @private
  */
 function _isNumber(value) {
-	return typeof value === 'number';
+	return typeof value === "number";
 }
 /**
  * @since 0.0.1
@@ -95,7 +95,7 @@ export function isNull(value) {
  * Check if value is funciton
  */
 export function isFunction(value) {
-	return typeof value === 'function';
+	return typeof value === "function";
 }
 /**
  * @since 0.0.1
@@ -106,7 +106,7 @@ export function isFunction(value) {
  * Check if value is array
  */
 export function isDate(value) {
-	return Object.prototype.toString.call(value) === '[object Date]';
+	return Object.prototype.toString.call(value) === "[object Date]";
 }
 /**
  * @since 0.0.1
@@ -117,7 +117,7 @@ export function isDate(value) {
  * Check if object is an regular expression
  */
 export function isRegExp(value) {
-	return Object.prototype.toString.call(value) === '[object RegExp]';
+	return Object.prototype.toString.call(value) === "[object RegExp]";
 }
 /**
  * @since 0.0.1
@@ -128,7 +128,7 @@ export function isRegExp(value) {
  * Check if value is object
  */
 export function isObject(value) {
-	return !isNull(value) && typeof value === 'object';
+	return !isNull(value) && typeof value === "object";
 }
 
 /**

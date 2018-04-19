@@ -1,5 +1,5 @@
-import {Tokens, Token} from './tokens';
-import {InvalidTokenError} from './error';
+import {Tokens, Token} from "./tokens";
+import {InvalidTokenError} from "./error";
 
 /**
  * Parser class

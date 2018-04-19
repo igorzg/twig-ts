@@ -1,4 +1,4 @@
-import {Tokens, getTokenName} from './tokens';
+import {Tokens, getTokenName} from "./tokens";
 
 export class Token {
   type: Tokens;

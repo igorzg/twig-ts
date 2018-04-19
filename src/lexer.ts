@@ -1,19 +1,20 @@
-import {Tokens, Token} from './tokens';
-import {isNull} from './core';
-import {ILexerOptions, LexerOptions} from './lexeroptions';
+import {Tokens, Token} from "./tokens";
+import {isNull} from "./core";
+import {LexerOptions} from "./lexeroptions";
 import {
   InvalidTokenError,
   InvalidCloseTokenError,
   TokenNotFoundError,
   InvalidOpenTokenError
-} from './error';
+} from "./error";
+import {ILexerOptions} from "./interfaces/ilexeroptions";
 
 const CHARS_WHITESPACE = /\s|\n|\t|\r|\u00A0/;
 const CHARS_DELIMITER = /\(|\)|\.|\[|]|\{|}|%|\*|\-|\+|~|\/|#|,|:|\||<|>|=|!/;
 const CHARS_ALL = /\s|\n|\t|\r|\u00A0|\(|\)|\.|\[|]|\{|}|%|\*|\-|\+|~|\/|#|,|:|\||<|>|=|!/;
 const CHARS_NUMBER = /^[0-9]+$/;
 const CHARS_BOOLEAN = /^(true|false)$/;
-const CHAR_NEW_LINE = '\n';
+const CHAR_NEW_LINE = "\n";
 
 /**
  * Lexer class
@@ -89,7 +90,7 @@ export class Lexer {
    * @private
    */
   private collectUntil(match: RegExp): string {
-    let str = '';
+    let str = "";
     while (!this.isDone()) {
       if (match.test(this.current())) {
         this.backward();
@@ -185,7 +186,7 @@ export class Lexer {
   private openToken() {
     let tok;
     if (
-      (tok = this.collect(this.opts.BLOCK_START + '-')) ||
+      (tok = this.collect(this.opts.BLOCK_START + "-")) ||
       (tok = this.collect(this.opts.BLOCK_START))
     ) {
       this.tokenType = Tokens.BLOCK_START;
@@ -208,7 +209,7 @@ export class Lexer {
    * @param delimiter
    */
   private parseString(delimiter) {
-    let str = '', isClosed = false;
+    let str = "", isClosed = false;
     this.forward(); // skip first delimiter
     while (!this.isDone()) {
       if (this.peekNext(delimiter)) {
@@ -248,23 +249,23 @@ export class Lexer {
         Tokens.WHITESPACE,
         this.current()
       );
-    } else if (this.peekNext('"') && !this.isCommentType()) {
+    } else if (this.peekNext("\"") && !this.isCommentType()) {
       this.token(
         Tokens.STRING,
-        this.parseString('"')
+        this.parseString("\"")
       );
-    } else if (this.peekNext('\'') && !this.isCommentType()) {
+    } else if (this.peekNext("'") && !this.isCommentType()) {
       this.token(
         Tokens.STRING,
-        this.parseString('\'')
+        this.parseString("'")
       );
     } else if (
       !this.isCommentType() &&
       CHARS_DELIMITER.test(this.current())
     ) {
       let operators = [
-          '===', '!==', '==', '!=', '>=', '<=', '++',
-          '--', '>', '<', '+', '-', '*', '/', '%'
+          "===", "!==", "==", "!=", ">=", "<=", "++",
+          "--", ">", "<", "+", "-", "*", "/", "%"
         ],
         tok = this.current(),
         type = null,
@@ -282,40 +283,40 @@ export class Lexer {
 
       if (!isOperator) {
         switch (tok) {
-          case '(':
+          case "(":
             type = Tokens.LEFT_PAREN;
             break;
-          case ')':
+          case ")":
             type = Tokens.RIGHT_PAREN;
             break;
-          case '[':
+          case "[":
             type = Tokens.LEFT_BRACKET;
             break;
-          case ']':
+          case "]":
             type = Tokens.RIGHT_BRACKET;
             break;
-          case '{':
+          case "{":
             type = Tokens.LEFT_CURLY;
             break;
-          case '}':
+          case "}":
             type = Tokens.RIGHT_CURLY;
             break;
-          case ',':
+          case ",":
             type = Tokens.COMMA;
             break;
-          case ':':
+          case ":":
             type = Tokens.COLON;
             break;
-          case '~':
+          case "~":
             type = Tokens.TILDE;
             break;
-          case '|':
+          case "|":
             type = Tokens.PIPE;
             break;
-          case '.':
+          case ".":
             type = Tokens.DOT;
             break;
-          case '=':
+          case "=":
             type = Tokens.ASSIGNMENT;
             break;
           default:
@@ -365,8 +366,8 @@ export class Lexer {
    * @returns {any}
    */
   private collectOpenToken(): string {
-    if (this.peekNext(this.opts.BLOCK_START + '-')) {
-      return this.collect(this.opts.BLOCK_START + '-');
+    if (this.peekNext(this.opts.BLOCK_START + "-")) {
+      return this.collect(this.opts.BLOCK_START + "-");
     } else if (this.peekNext(this.opts.BLOCK_START)) {
       return this.collect(this.opts.BLOCK_START);
     } else if (this.peekNext(this.opts.VARIABLE_START)) {
@@ -382,8 +383,8 @@ export class Lexer {
    * @returns {any}
    */
   private collectCloseToken(): string {
-    if (this.peekNext('-' + this.opts.BLOCK_END)) {
-      return this.collect('-' + this.opts.BLOCK_END);
+    if (this.peekNext("-" + this.opts.BLOCK_END)) {
+      return this.collect("-" + this.opts.BLOCK_END);
     } else if (this.peekNext(this.opts.BLOCK_END)) {
       return this.collect(this.opts.BLOCK_END);
     } else if (this.peekNext(this.opts.VARIABLE_END)) {
@@ -399,7 +400,7 @@ export class Lexer {
    * @returns {any}
    */
   private getCloseTokenType(): Tokens {
-    if (this.peekNext('-' + this.opts.BLOCK_END) || this.peekNext(this.opts.BLOCK_END)) {
+    if (this.peekNext("-" + this.opts.BLOCK_END) || this.peekNext(this.opts.BLOCK_END)) {
       return Tokens.BLOCK_END;
     } else if (this.peekNext(this.opts.VARIABLE_END)) {
       return Tokens.VARIABLE_END;
@@ -415,7 +416,7 @@ export class Lexer {
    */
   private isOpeningToken(): boolean {
     return (
-      this.peekNext(this.opts.BLOCK_START + '-') ||
+      this.peekNext(this.opts.BLOCK_START + "-") ||
       this.peekNext(this.opts.BLOCK_START) ||
       this.peekNext(this.opts.VARIABLE_START) ||
       this.peekNext(this.opts.COMMENT_START)
@@ -428,7 +429,7 @@ export class Lexer {
    */
   private isClosingToken(): boolean {
     return (
-      this.peekNext('-' + this.opts.BLOCK_END) ||
+      this.peekNext("-" + this.opts.BLOCK_END) ||
       this.peekNext(this.opts.BLOCK_END) ||
       this.peekNext(this.opts.VARIABLE_END) ||
       this.peekNext(this.opts.COMMENT_END)
@@ -492,7 +493,7 @@ export class Lexer {
         this.collectCloseToken()
       );
       this.tokenType = null;
-    } else if (this.peekNext('-' + this.opts.BLOCK_END) && this.isBlockType()) {
+    } else if (this.peekNext("-" + this.opts.BLOCK_END) && this.isBlockType()) {
       this.token(
         Tokens.BLOCK_END,
         this.collectCloseToken()
