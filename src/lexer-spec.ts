@@ -1,23 +1,22 @@
-import {Lexer} from "../lexer";
-import {LexerOptions} from "../lexeroptions";
-import {Tokens, getTokenName} from "../tokens";
+import {Lexer} from "./lexer";
+import {LexerOptions} from "./lexeroptions";
+import {Tokens, getTokenName} from "./tokens";
 import {readFileSync} from "fs";
-import {assert} from "chai";
 
-let layout = readFileSync(__dirname + "/../../tmpl/layout.twig", "utf-8");
+let layout = readFileSync(process.cwd() + "/tmpl/layout.twig", "utf-8");
 let layoutTokens = JSON.parse(
-  readFileSync(__dirname + "/../../tmpl/layout-tokens.json", "utf-8")
+  readFileSync(process.cwd() + "/tmpl/layout-tokens.json", "utf-8")
 );
 
 describe("Lexer", () => {
-  it("Should give correct lexical analysis of layout.twig", (done) => {
+  test("Should give correct lexical analysis of layout.twig", (done) => {
     let t1 = (new Date()).getTime();
     let lexer1 = new Lexer(layout, new LexerOptions());
     Promise.all([
       lexer1.scan().then(
         (data) => {
-          assert.deepEqual(data.tokens, layoutTokens);
-          assert.equal(data.tokens.length, 253);
+          expect(data.tokens).toEqual(layoutTokens);
+          expect(data.tokens.length).toBe(253);
         }
       )
     ])
@@ -34,14 +33,14 @@ describe("Lexer", () => {
   });
 
 
-  it("Should open and close block", (done) => {
+  test("Should open and close block", (done) => {
     let template = `<div>
              {% %}
     </div>`;
     let lexer = new Lexer(template, new LexerOptions());
     lexer.scan().then(
       (data) => {
-        assert.deepEqual(data.tokens, [
+        expect(data.tokens).toEqual([
           {
             columnNumber: 14,
             lineNumber: 2,
@@ -69,12 +68,12 @@ describe("Lexer", () => {
     ).catch(done);
   });
 
-  it("Should open and close variable", (done) => {
+  test("Should open and close variable", (done) => {
     let template = `<div>{{ value }}</div>`;
     let lexer = new Lexer(template, new LexerOptions());
     lexer.scan().then(
       (data) => {
-        assert.deepEqual(data.tokens, [
+        expect(data.tokens).toEqual([
           {
             columnNumber: 7,
             lineNumber: 1,
@@ -116,12 +115,12 @@ describe("Lexer", () => {
     ).catch(done);
   });
 
-  it("Should open and close comment", (done) => {
+  test("Should open and close comment", (done) => {
     let template = `<div>{# this is some comment {{}} #}</div>`;
     let lexer = new Lexer(template, new LexerOptions());
     lexer.scan().then(
       (data) => {
-        assert.deepEqual(data.tokens, [
+        expect(data.tokens).toEqual([
           {
             columnNumber: 7,
             lineNumber: 1,
@@ -142,75 +141,66 @@ describe("Lexer", () => {
     ).catch(done);
   });
 
-  it("Should throw InvalidOpenTokenError", (done) => {
+  test("Should throw InvalidOpenTokenError", (done) => {
     let lexer = new Lexer(`This is an test #} and it should throw error`, new LexerOptions());
     lexer.scan().then(null, (error) => {
-      assertErrorContains(error, "Invalid open token found at line: 1");
-      assertErrorContains(error, "column: 18");
-      assertErrorContains(error, "value: #}");
-      assertErrorContains(error, "tokenType: " + Tokens.COMMENT_END);
-      assertErrorContains(error, "tokenName: " + getTokenName(Tokens.COMMENT_END));
+      expect(error.message).toContain("Invalid open token found at line: 1");
+      expect(error.message).toContain("column: 18");
+      expect(error.message).toContain("value: #}");
+      expect(error.message).toContain("tokenType: " + Tokens.COMMENT_END);
+      expect(error.message).toContain("tokenName: " + getTokenName(Tokens.COMMENT_END));
       done();
     }).catch(done);
   });
 
-  it("Should throw TokenNotFoundError", (done) => {
+  test("Should throw TokenNotFoundError", (done) => {
     let lexer = new Lexer(`This is an test 
     {# and it should throw error`, new LexerOptions());
     lexer.scan().then(null, (error) => {
-      assertErrorContains(error, "Unexpected end of input");
-      assertErrorContains(error, "Token was opened with token: {# at line 2 column 5");
-      assertErrorContains(error, "expected END token should be found at line: 2, column: 31");
+      expect(error.message).toContain("Unexpected end of input");
+      expect(error.message).toContain("Token was opened with token: {# at line 2 column 5");
+      expect(error.message).toContain("expected END token should be found at line: 2, column: 31");
       done();
     }).catch(done);
   });
 
-  it("Should throw InvalidCloseTokenError", (done) => {
+  test("Should throw InvalidCloseTokenError", (done) => {
     let lexer = new Lexer(`This is an test 
     {% and it should throw #} error`, new LexerOptions());
     lexer.scan().then(null, (error) => {
-      assertErrorContains(error, "Invalid close token found at line: 2");
-      assertErrorContains(error, "column: 28");
-      assertErrorContains(error, "value: #}");
-      assertErrorContains(error, "tokenType: " + Tokens.BLOCK_START);
-      assertErrorContains(error, "tokenName: " + getTokenName(Tokens.BLOCK_START));
+      expect(error.message).toContain("Invalid close token found at line: 2");
+      expect(error.message).toContain("column: 28");
+      expect(error.message).toContain("value: #}");
+      expect(error.message).toContain("tokenType: " + Tokens.BLOCK_START);
+      expect(error.message).toContain("tokenName: " + getTokenName(Tokens.BLOCK_START));
       done();
     }).catch(done);
   });
 
-  it("Should throw InvalidTokenError {%", (done) => {
+  test("Should throw InvalidTokenError {%", (done) => {
     let lexer = new Lexer(`This is an test 
     {% {% token %} and it should throw  error`, new LexerOptions());
     lexer.scan().then(null, (error) => {
-      assertErrorContains(error, "Invalid token found at line: 2");
-      assertErrorContains(error, "column: 8");
-      assertErrorContains(error, "value: {%");
-      assertErrorContains(error, "tokenType: " + Tokens.BLOCK_START);
-      assertErrorContains(error, "tokenName: " + getTokenName(Tokens.BLOCK_START));
+      expect(error.message).toContain("Invalid token found at line: 2");
+      expect(error.message).toContain("column: 8");
+      expect(error.message).toContain("value: {%");
+      expect(error.message).toContain("tokenType: " + Tokens.BLOCK_START);
+      expect(error.message).toContain("tokenName: " + getTokenName(Tokens.BLOCK_START));
       done();
     }).catch(done);
   });
 
-  it("Should throw InvalidTokenError {{", (done) => {
+  test("Should throw InvalidTokenError {{", (done) => {
     let lexer = new Lexer(`This is an test 
     {{ {{ token }} and it should throw  error`, new LexerOptions());
     lexer.scan().then(null, (error) => {
-      assertErrorContains(error, "Invalid token found at line: 2");
-      assertErrorContains(error, "column: 8");
-      assertErrorContains(error, "value: {{");
-      assertErrorContains(error, "tokenType: " + Tokens.VARIABLE_START);
-      assertErrorContains(error, "tokenName: " + getTokenName(Tokens.VARIABLE_START));
+      expect(error.message).toContain("Invalid token found at line: 2");
+      expect(error.message).toContain("column: 8");
+      expect(error.message).toContain("value: {{");
+      expect(error.message).toContain("tokenType: " + Tokens.VARIABLE_START);
+      expect(error.message).toContain("tokenName: " + getTokenName(Tokens.VARIABLE_START));
       done();
     }).catch(done);
   });
 
-
-  function assertErrorContains(error: Error, message: string) {
-    try {
-      assert.isTrue(error.message.indexOf(message) > -1);
-    } catch (e) {
-      throw new Error(error.message + " <- does not contain -> " + message);
-    }
-  }
 });
-

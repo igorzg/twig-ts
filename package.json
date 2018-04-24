@@ -4,9 +4,8 @@
   "description": "Templating engine for nodejs",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -fR dist/",
     "compile": "tsc",
-    "test": "npm run compile && mocha --reporter spec \"dist/tests/**/*.js\""
+    "test": "jest -c jest-runner.json"
   },
   "keywords": [
     "templating",
@@ -18,16 +17,15 @@
   "license": "MIT",
   "bin": {
     "tsc": "node_modules/typescript",
-    "mocha": "node_modules/mocha"
+    "jest": "node_modules/jest"
   },
   "dependencies": {},
   "devDependencies": {
-    "@types/chai": "^4.1.2",
-    "@types/mocha": "^5.1.0",
     "@types/node": "^9.6.5",
-    "chai": "^3.5.0",
-    "mocha": "^2.5.3",
-    "tslint": "^3.15.1",
-    "typescript": "^2.8.1"
+    "@types/jest": "^22.2.3",
+    "jest": "^22.4.3",
+    "ts-jest": "^22.4.4",
+    "tslint": "^5.9.1",
+    "typescript": "^2.8.3"
   }
 }
