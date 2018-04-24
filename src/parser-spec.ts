@@ -1,9 +1,10 @@
 import {Lexer} from "./lexer";
 import {LexerOptions} from "./lexeroptions";
 import {Parser} from "./parser";
-import {readFileSync} from "fs";
+import {FileSystem} from "./fs";
 
-let layout = readFileSync(process.cwd() + "/tmpl/layout.twig", "utf-8");
+let fileSystem = new FileSystem();
+let layout =  fileSystem.readFileSync("/tmpl/layout.twig").toString("utf8");
 
 describe("Parser", () => {
   test("Should scan tokens from lexer", (done) => {

@@ -1,11 +1,13 @@
 import {Lexer} from "./lexer";
 import {LexerOptions} from "./lexeroptions";
 import {Tokens, getTokenName} from "./tokens";
-import {readFileSync} from "fs";
 
-let layout = readFileSync(process.cwd() + "/tmpl/layout.twig", "utf-8");
+import {FileSystem} from "./fs";
+
+let fileSystem = new FileSystem();
+let layout =  fileSystem.readFileSync("/tmpl/layout.twig").toString("utf8");
 let layoutTokens = JSON.parse(
-  readFileSync(process.cwd() + "/tmpl/layout-tokens.json", "utf-8")
+  fileSystem.readFileSync("/tmpl/layout-tokens.json").toString("utf8")
 );
 
 describe("Lexer", () => {
