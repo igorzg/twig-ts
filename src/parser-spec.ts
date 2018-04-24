@@ -4,7 +4,7 @@ import {Parser} from "./parser";
 import {FileSystem} from "./fs";
 
 let fileSystem = new FileSystem();
-let layout =  fileSystem.readFileSync("/tmpl/layout.twig").toString("utf8");
+let layout =  fileSystem.readFileSync("/tmpl/layouts/layout.twig").toString("utf8");
 
 describe("Parser", () => {
   test("Should scan tokens from lexer", (done) => {

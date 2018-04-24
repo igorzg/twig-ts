@@ -5,9 +5,9 @@ import {Tokens, getTokenName} from "./tokens";
 import {FileSystem} from "./fs";
 
 let fileSystem = new FileSystem();
-let layout =  fileSystem.readFileSync("/tmpl/layout.twig").toString("utf8");
+let layout =  fileSystem.readFileSync("/tmpl/layouts/layout.twig").toString("utf8");
 let layoutTokens = JSON.parse(
-  fileSystem.readFileSync("/tmpl/layout-tokens.json").toString("utf8")
+  fileSystem.readFileSync("/tmpl/layouts/layout-tokens.json").toString("utf8")
 );
 
 describe("Lexer", () => {

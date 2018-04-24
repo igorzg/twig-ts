@@ -7,7 +7,11 @@ import {InvalidTokenError} from "./error";
 export class Parser {
   private openToken: Tokens = null;
 
-  constructor(private str: string, private tokens: Array<Token>, private instructions: Array<any>) {
+  constructor(
+    private str: string,
+    private tokens: Array<Token>,
+    private instructions: Array<any>
+  ) {
   }
 
   /**

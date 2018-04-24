@@ -25,7 +25,8 @@ export enum Tokens {
   NUMBER,
   BOOLEAN,
   SYMBOL,
-  UNKNOWN
+  UNKNOWN,
+  RAW
 }
 
 /**
@@ -85,6 +86,8 @@ export function getTokenName(token: Tokens): string {
       return "SYMBOL";
     case Tokens.UNKNOWN:
       return "UNKNOWN";
+    case Tokens.RAW:
+      return "RAW";
     default:
       throw new Error("Invalid token type: " + token);
   }
