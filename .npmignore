@@ -1,0 +1,6 @@
+/src/
+/tmpl/
+/build/*-spec.js
+/jest-runner.json
+/tsconfig.json
+/tslint.json
